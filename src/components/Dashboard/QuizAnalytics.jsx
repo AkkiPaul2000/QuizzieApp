@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import { BACKEND_URL } from '../../utils/constant';
 import EditQuizModal from './EditQuizModal';
+import './Analytics.css'
 
 function QuizAnalytics() {
   const { user } = useAuth();
@@ -54,7 +55,8 @@ function QuizAnalytics() {
   return (
     <div className='quizAnalytics'>
       <h1>Quiz Analytics</h1>
-      <table>
+      <div class="table-container">
+  <table>
     <thead>
       <tr>
         <th>S.No</th>
@@ -66,26 +68,26 @@ function QuizAnalytics() {
     </thead>
     <tbody>
       {quizzes && quizzes.map((quiz, index) => (
-            <tr key={quiz._id}>
-              <td>{index + 1}</td>
-              <td>{quiz.title}</td>
-              <td>01 Sep, 2023</td>
-              <td>{quiz.impressions}</td>
-              <td>
-                <button className="edit-btn" onClick={() => handleEditClick(quiz)}>
-                  Edit
-                </button>
-                <button className="share-btn">Share</button>
-                <a href="#" className="analysis-link">
-                  Question Wise Analysis
-                </a>
-              </td>
-            </tr>
-          ))}
-      
-      
-      </tbody>
+        <tr key={quiz._id}>
+          <td>{index + 1}</td>
+          <td>{quiz.title}</td>
+          <td>01 Sep, 2023</td>
+          <td>{quiz.impressions}</td>
+          <td>
+            <button className="edit-btn" onClick={() => handleEditClick(quiz)}>
+              Edit
+            </button>
+            <button className="share-btn">Share</button>
+            <a href="#" className="analysis-link">
+              Question Wise Analysis
+            </a>
+          </td>
+        </tr>
+      ))}
+    </tbody>
   </table>
+</div>
+
    {/* Edit Quiz Modal */}
    {isEditModalOpen && selectedQuiz && (
         <EditQuizModal quiz={selectedQuiz} onClose={handleCloseModal} onSave={handleSaveQuiz} />

@@ -21,13 +21,13 @@
 }
 
 .loginDiv h2 {
-    font-family: Jomhuria;
     color: var(--fontColor1);
-    font-size: 50px;
-    font-weight: 1000;
+    font-family: Jomhuria;
+    font-size: 100px;
+    font-weight: 400;
     line-height: 100px;
     text-align: center;
-    font-style: normal;
+    margin: 40px;
 }
 
 .switchButtons {
@@ -146,6 +146,9 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .authButton:hover {

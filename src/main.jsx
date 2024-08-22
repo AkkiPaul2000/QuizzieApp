@@ -24,7 +24,7 @@ const ProtectedRoute = ({ children }) => {
   return (
     <div style={{ display: 'flex', flex: 1, height: '100vh' }}>
       <Sidebar /> {/* Sidebar will only render for protected routes */}
-      <div style={{ display: 'flex', flex: 3, backgroundColor: '#EDEDED' }}>
+      <div style={{ display: 'flex', flex: 3, backgroundColor: '#EDEDED'}}>
         {children}
       </div>
     </div>

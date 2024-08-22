@@ -1,0 +1,64 @@
+aside {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+aside nav {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+aside nav ul {
+    flex: 1;
+    padding: 20px;
+}
+
+aside nav ul li {
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    text-align: left;
+    color: var(--fontColor1);
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 30px;
+    list-style: none;
+    /* Remove bullet points or numbers from list items */
+}
+
+.activeLink {
+    color: var(--fontColor1);
+    box-shadow: 0px 0px 14px 0px #0000001F;
+    border-radius: 5px;
+    margin: 0;
+    padding: 5px 10px;
+}
+
+.brandName {
+    text-align: center;
+    margin-top: 10px;
+    font-family: Jomhuria;
+    font-size: 70px;
+    font-weight: 400;
+    line-height: 70px;
+    text-align: center;
+}
+
+.logOut {
+    border: 1px solid white;
+    text-align: center;
+    padding: 20px;
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 30px;
+    text-align: center;
+    border-top: 1px solid var(--fontColor1);
+    cursor: pointer;
+}
