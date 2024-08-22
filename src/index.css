@@ -1,23 +1,25 @@
 :root {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: 'Poppins', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
+    background-color: var(--bgColor2);
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    --bgColor1: #FFFFFF;
+    --bgColor2: #F2F2F2;
+    --fontColor1: #474444;
+    color: var(--fontColor1);
 }
 
 html,
 body,
 #root {
     height: 100%;
-    /* Ensures the root element and body take up the full height */
     margin: 0;
-    /* Removes default margin */
     padding: 0;
 }
 
@@ -27,7 +29,6 @@ body {
     min-width: 320px;
     min-height: 100vh;
     justify-content: flex-start;
-    /* Align items to the start of the flex container */
 }
 
 a {

@@ -35,7 +35,7 @@ const MainApp = () => {
   return (
     <AuthProvider>
       <Router>
-        <div style={{ backgroundColor: 'red', display: 'flex', flexDirection: 'column', height: '100vh' }}>
+        <div style={{ backgroundColor: '#F2F2F2', display: 'flex', flexDirection: 'column', height: '100vh' }}>
           
           <ToastContainer />
           <Routes>

@@ -1,5 +1,7 @@
 /* In your global CSS (index.css) or another global stylesheet */
 
+
+/* 
 html,
 body,
 #root {
@@ -21,3 +23,8 @@ body {
     width: 100%;
     height: 100%;
 }
+
+:root {
+    --bgcolor1: #FFFFFF;
+    --bgcolor2: #F2F2F2;
+} */

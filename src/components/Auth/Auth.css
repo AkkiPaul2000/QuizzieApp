@@ -1,0 +1,157 @@
+/* Auth.css */
+
+.LoginForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f2f2f2;
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    color: var(--fontColor1);
+}
+
+.loginDiv {
+    background-color: #FFFFFF;
+    height: 611px;
+    width: 1066px;
+    border-radius: 15px;
+}
+
+.loginDiv h2 {
+    font-family: Jomhuria;
+    color: var(--fontColor1);
+    font-size: 50px;
+    font-weight: 1000;
+    line-height: 100px;
+    text-align: center;
+    font-style: normal;
+}
+
+.switchButtons {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.switchButton1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 217px;
+    height: 37px;
+    gap: 0px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 50px 0px #0019FF3D;
+    opacity: 0px;
+    cursor: pointer;
+}
+
+.switchButton2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 217px;
+    height: 37px;
+    gap: 0px;
+    opacity: 0px;
+    cursor: pointer;
+}
+
+.LoginForm form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.loginDiv form .formInputs {
+    display: flex;
+    flex-direction: column;
+    width: 606px;
+    height: 245px;
+    gap: 0px;
+    border-radius: 10px 10px 0px 0px;
+    border: 0px 0px 2px 0px;
+    opacity: 0px;
+    margin: 30px 0px;
+}
+
+.loginDiv form .formInputs div {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginDiv form .formInputs div label {
+    flex: 1;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.loginDiv form .formInputs div input {
+    flex: 2;
+    width: 388px;
+    height: 38px;
+    gap: 0px;
+    border-radius: 10px 10px 0px 0px;
+    /* border: 0px 0px 2px 0px; */
+    opacity: 0px;
+    background-color: #F4F4F4;
+    margin-left: 20px;
+    /* border: 1px solid #FFFFFF; */
+    color: var(--fontColor1);
+    border: none;
+}
+
+.LoginForm form button {
+    background-color: #A9BCFF;
+    color: var(--fontColor1);
+    width: 274px;
+    height: 38px;
+    gap: 0px;
+    border-radius: 8px;
+    opacity: 0px;
+}
+
+.inputWrapper {
+    position: relative;
+    margin-bottom: 1.5em;
+}
+
+.inputError {
+    border-color: red;
+}
+
+.errorText {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%) translateX(113%);
+    color: red;
+    font-size: 0.9em;
+    pointer-events: none;
+}
+
+.authButton {
+    width: 100%;
+    padding: 0.75em;
+    background-color: #a3a3ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.authButton:hover {
+    background-color: #9191f5;
+}
+
+.authButton:active {
+    background-color: #7b7bdf;
+}
