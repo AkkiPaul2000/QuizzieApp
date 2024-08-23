@@ -254,7 +254,7 @@ const CreateQuiz = ({ onClose }) => {
           </div>
           <div>
           <div className='typeButton' >
-                <label htmlFor="type" >Type:</label>
+                <label htmlFor="type" className='typeText'>Type:</label>
                 <button
                   type="button" 
                   name="type" 
@@ -276,12 +276,17 @@ const CreateQuiz = ({ onClose }) => {
           </div>
           <div className='buttons'>
             <button onClick={handleClose} className='cancel'>Cancel</button>
-          <button
-          // className={(!quizData.title || !quizData.type)?'disabled':'createQuiz'}
-          className='createQuiz'          
-          onClick={()=>{
-            setQuizType(!quizType)
-            }} disabled={!quizData.title || !quizData.type}>Continue</button></div>
+            <button
+              className='cancel'
+              style={(!quizData.title || !quizData.type) ? { backgroundColor: '#ccc', color: '#666', cursor: 'not-allowed' } : { backgroundColor:'#60B84B', color:'white' }}
+              onClick={() => {
+                setQuizType(!quizType)
+              }}
+              disabled={!quizData.title || !quizData.type}
+            >
+              Continue
+            </button>
+            </div>
           </div>
           )}
 
@@ -327,7 +332,8 @@ const CreateQuiz = ({ onClose }) => {
                 display: 'flex',
                 flexWrap: 'wrap',
                 alignItems: 'center',
-                gap: '10px'
+                gap: '10px',
+                backgroundColor:'red'
             }}>
                 <label htmlFor="type">Option Type</label>
 

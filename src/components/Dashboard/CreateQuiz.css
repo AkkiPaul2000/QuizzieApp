@@ -22,14 +22,42 @@
 /* Modal Content */
 
 .content {
+    display: flex;
     background-color: #fefefe;
-    padding: 50px;
+    padding: 70px;
     border: 1px solid #888;
-    width: 50%;
+    width: 35%;
     /* Increased width to 80% */
     min-width: 500px;
     /* Adjusted max width */
     border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal .content button:hover {
+    box-shadow: 0px 0px 25px 0px #00000026;
+}
+
+.modal .content input[type="text"] {
+    background-color: #FFFFFF;
+    font-family: Poppins;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 37.5px;
+    text-align: left;
+    color: #9F9F9F;
+}
+
+.modal .content input[type="text"]::placeholder {
+    color: #9F9F9F;
+    /* Placeholder text color */
+    background-color: #FFFFFF;
+    font-family: Poppins;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 37.5px;
+    text-align: left;
 }
 
 .close {
@@ -81,7 +109,7 @@
     display: flex;
     /* padding: 7px 50px; */
     border: 1px solid #ccc;
-    height: 30px;
+    height: 50px;
     margin: 10px 40px;
     border-radius: 10px;
     background-color: #FFFFFF;
@@ -91,12 +119,25 @@
     color: #9F9F9F;
     justify-content: center;
     align-items: center;
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    text-align: center;
 }
 
 .type-button.active {
     background-color: #60B84B;
     /* Or any color you prefer */
     color: #FFFFFF;
+}
+
+.typeText {
+    font-family: Poppins;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 37.5px;
+    text-align: center;
 }
 
 
@@ -217,8 +258,27 @@ button:disabled {
     cursor: not-allowed;
 }
 
-.cancel {
+.modal .content button {
+    width: 171px;
+    height: 46px;
+    gap: 0px;
+    border-radius: 10px;
+    opacity: 0px;
+    white-space: nowrap;
+}
+
+.buttons .cancel {
     background-color: #FFFFFF;
+    box-shadow: 0px 0px 15px 0px #00000040;
+    font-family: 'Poppins';
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 31.5px;
+    text-align: left;
+    color: var(--fontColor1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .buttons {
@@ -244,8 +304,16 @@ button {
 
 .createQuiz {
     background-color: #60B84B;
-    color: #FFFFFF;
-    text-wrap: nowrap;
+    box-shadow: 0px 0px 15px 0px #00000040;
+    font-family: 'Poppins';
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 31.5px;
+    text-align: left;
+    color: var(--fontColor1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .quizList {
