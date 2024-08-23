@@ -17,6 +17,7 @@ import './index.css';
 
 const ProtectedRoute = ({ children }) => {
   const { isLoggedIn } = useAuth();
+  
 
   if (!isLoggedIn) {
     return <Navigate to="/login" replace />;
@@ -47,14 +48,6 @@ const MainApp = () => {
               element={
                 <ProtectedRoute>
                   <Dashboard/>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/createQuiz"
-              element={
-                <ProtectedRoute>
-                  <CreateQuiz />
                 </ProtectedRoute>
               }
             />

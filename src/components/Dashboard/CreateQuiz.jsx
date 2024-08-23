@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { BACKEND_URL } from '../../utils/constant';
-import './Dashboard.css'
+import './CreateQuiz.css'
 import plus from '../../assets/plus.svg'; // Assuming your SVG is in the 'assets' folder
 import bin from '../../assets/bin.svg'; 
 import cross from '../../assets/cross.svg'; 
@@ -234,8 +234,8 @@ const CreateQuiz = ({ onClose }) => {
 
   return (
     <div className="modal">
-      <div className="modal-content">
-        <span className="close" onClick={handleClose}>&times;</span>
+      <div className="content">
+        {/* <span className="close" onClick={handleClose}>&times;</span> */}
         {/* <h2>Create New Quiz</h2> */}
         <form onSubmit={handleSubmit}>
         {!quizType && (
