@@ -22,9 +22,9 @@ const ProtectedRoute = ({ children }) => {
     return <Navigate to="/login" replace />;
   }
   return (
-    <div style={{ display: 'flex', flex: 1, height: '100vh' }}>
-      <Sidebar /> {/* Sidebar will only render for protected routes */}
-      <div style={{ display: 'flex', flex: 3, backgroundColor: '#EDEDED'}}>
+    <div className='protected-route-container'>
+      <Sidebar className="sidebar" /> {/* Sidebar will only render for protected routes */}
+      <div className="main-content">
         {children}
       </div>
     </div>

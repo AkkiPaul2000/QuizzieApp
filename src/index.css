@@ -36,6 +36,29 @@ body {
     justify-content: flex-start;
 }
 
+
+/* In your ProtectedRoute component's styles or a separate CSS file */
+
+.protected-route-container {
+    display: flex;
+    flex: 1;
+    /* Allow the container to grow and take up available space */
+    height: 100vh;
+    /* Set the container's height to 100% of viewport height */
+}
+
+.sidebar {
+    flex: 1;
+    /* Sidebar takes 1/3 of the width */
+}
+
+.main-content {
+    flex: 2;
+    /* Main content takes 2/3 of the width */
+    background-color: #EDEDED;
+    /* Apply background color to the main content area */
+}
+
 a {
     font-weight: 500;
     color: #646cff;
