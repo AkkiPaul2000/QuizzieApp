@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../utils/auth';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { BACKEND_URL } from '../../utils/constant';
+import { BACKEND_URL, FRONTEND_URL } from '../../utils/constant';
 import EditQuizModal from './EditQuizModal';
 import './Analytics.css';
 import share from '../../assets/share.svg'
@@ -17,7 +17,20 @@ function QuizAnalytics() {
   const [selectedQuiz, setSelectedQuiz] = useState(null); // To store the quiz being edited
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [delModel, setDelModel] = useState(false);
+  const handleShareClick = (id) => {
+    const Link=`${FRONTEND_URL}${id}`;
+    navigator.clipboard.writeText(Link)
+    .then(() => {
+        toast.success('Link copied to clipboard!', {
+          autoClose: 2000, // Auto-close after 2 seconds
+        });
+      })
+      .catch(err => {
+        console.error('Failed to copy text: ', err);
+        toast.error('Failed to copy link. Please try again.');
+      });
 
+  };
 
   useEffect(() => {
     const fetchQuizzes = async () => {
@@ -54,13 +67,28 @@ function QuizAnalytics() {
     setIsEditModalOpen(false);
     setSelectedQuiz(null);
   };
+  const handleDeleteQuiz = async () => {
+    try {
+      await axios.delete(`${BACKEND_URL}/api/quiz/delete/${selectedQuiz}`, {
+        headers: { Authorization: localStorage.getItem('token') },
+      });
 
+      // Update the quiz list after successful deletion
+      setQuizzes(prevQuizzes => prevQuizzes.filter(quiz => quiz._id !== selectedQuiz));
+      toast.success('Quiz deleted successfully!');
+      handleCloseDelModal(); // Close the delete confirmation modal
+    } catch (error) {
+      toast.error(error.response?.data?.error || 'Failed to delete quiz');
+    }
+  };
   const handleSaveQuiz = (updatedQuizData) => {
     console.log("updated Modal", updatedQuizData);
     toast.success('Quiz updated successfully!');
     setIsEditModalOpen(false); // Close modal on save
     setDelModel(false)
   };
+
+
 
   return (
     <div className="quizAnalytics">
@@ -88,10 +116,10 @@ function QuizAnalytics() {
                   <button className="edit-btn" style={{backgroundColor:'transparent'}}>
                   <img style={{cursor: 'pointer' }} src={edit} alt="edit"/>
                   </button>
-                  <button className="delete-btn" onClick={(e)=>handleDelClick(quiz)} style={{backgroundColor:'transparent'}}>
+                  <button className="delete-btn" onClick={(e)=>handleDelClick(quiz._id)} style={{backgroundColor:'transparent'}}>
                   <img style={{cursor: 'pointer' }} src={bin} alt="delete"/>
                   </button>
-                  <button className="share-btn" style={{backgroundColor:'transparent'}}>
+                  <button className="share-btn" onClick={()=>handleShareClick(quiz._id)} style={{backgroundColor:'transparent'}}>
                   <img style={{cursor: 'pointer' }} src={share} alt="share"/>
                   </button>
                   </td>
@@ -111,7 +139,7 @@ function QuizAnalytics() {
         <EditQuizModal quiz={selectedQuiz} onClose={handleCloseEditModal} onSave={handleSaveQuiz} />
       )}
       {delModel && selectedQuiz && (
-        <DelConfirm quiz={selectedQuiz} onClose={handleCloseDelModal} onSave={handleSaveQuiz} />
+        <DelConfirm quiz={selectedQuiz} onClose={handleCloseDelModal} onDelete={handleDeleteQuiz} />
       )}
     </div>
   );

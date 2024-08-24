@@ -35,20 +35,20 @@ const Register = () => {
     // Name validation: at least 3 characters, only letters and spaces
     const nameRegex = /^[A-Za-z\s]{3,}$/;
     if (!nameRegex.test(name)) {
-      setNameError('Please enter a valid name.');
+      setNameError('Invalid name.');
       isValid = false;
     }
 
     // Email validation: simple email regex
     if (!email) {
-      setEmailError('Please enter a valid email.');
+      setEmailError('Invalid email.');
       isValid = false;
     }
 
     // Password validation: at least 8 characters, one uppercase, one lowercase, one number, one special character
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
     if (!passwordRegex.test(password)) {
-      setPasswordError('Entered a weak password.');
+      setPasswordError('weak password.');
       isValid = false;
     }
 
@@ -120,7 +120,7 @@ const Register = () => {
                 onChange={handleInputChange(setPassword, setPasswordError)}
                 className={passwordError ? 'inputError' : ''}
               />
-              {passwordError && <span className='errorText'>{passwordError}</span>}
+              {passwordError && <span className='Pass1errorText'>{passwordError}</span>}
             </div>
             <div className='inputWrapper'>
               <label htmlFor="confirmPassword">Confirm Password</label>
@@ -131,7 +131,7 @@ const Register = () => {
                 onChange={handleInputChange(setConfirmPassword, setConfirmPasswordError)}
                 className={confirmPasswordError ? 'inputError' : ''}
               />
-              {confirmPasswordError && <span className='errorText'>{confirmPasswordError}</span>}
+              {confirmPasswordError && <span className='Pass2errorText'>{confirmPasswordError}</span>}
             </div>
           </div>
           <button type="submit" className='authButton'>Sign-Up</button>

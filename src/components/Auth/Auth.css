@@ -132,7 +132,27 @@
     position: absolute;
     top: 50%;
     left: 10px;
-    transform: translateY(-50%) translateX(113%);
+    transform: translateY(-50%) translateX(170%);
+    color: red;
+    font-size: 0.9em;
+    pointer-events: none;
+}
+
+.Pass1errorText {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%) translateX(142%);
+    color: red;
+    font-size: 0.9em;
+    pointer-events: none;
+}
+
+.Pass2errorText {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%) translateX(90%);
     color: red;
     font-size: 0.9em;
     pointer-events: none;
