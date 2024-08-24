@@ -1,0 +1,60 @@
+.linkHeading {
+    font-family: Poppins;
+    font-size: 39px;
+    font-weight: 600;
+    line-height: 58.5px;
+    text-align: center;
+    margin: 20px;
+    color: #474444;
+}
+
+.linkDiv {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0px 50px;
+    width: 450px;
+    height: 60px;
+    gap: 0px;
+    border-radius: 10px;
+    opacity: 0px;
+    background-color: #EDEDED;
+}
+
+.share {
+    background-color: #60B84B;
+    color: white;
+    width: 279px;
+    height: 46.14px;
+    gap: 0px;
+    border-radius: 10px;
+    opacity: 0px;
+}
+
+.result {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 845px;
+    height: 400px;
+    gap: 0px;
+    border-radius: 10px 0px 0px 0px;
+    opacity: 0px;
+}
+
+.result .close {
+    position: absolute;
+    /* Position absolutely within .result */
+    top: 0px;
+    /* Adjust as needed */
+    right: 0px;
+    /* Adjust as needed */
+}
+
+.result .close img {
+    width: 20px;
+    /* Adjust the width as needed */
+    height: 20px;
+}

@@ -7,6 +7,7 @@ import './CreateQuiz.css'
 import plus from '../../assets/plus.svg'; // Assuming your SVG is in the 'assets' folder
 import bin from '../../assets/bin.svg'; 
 import cross from '../../assets/cross.svg'; 
+import CopyLink from './CopyLink';
 
 const CreateQuiz = ({ onClose }) => {
 
@@ -30,6 +31,8 @@ const CreateQuiz = ({ onClose }) => {
    const [quizType,setQuizType]=useState(false)
   const [quizIndex,setQuizIndex]=useState(0)
   const [optionType,setOptionType]=useState("text")
+  const [completed,setCompleted]=useState(false)
+  const [linkId,setLinkId]=useState(false)
 
   const handleQuestionTextChange = (questionIndex, newQuestionText) => {
     setQuizData(prevQuizData => {
@@ -72,7 +75,6 @@ const CreateQuiz = ({ onClose }) => {
 
   }
   const handleOptionType=(e,questionIndex)=>{
-    console.log(e.target.value)
     setOptionType(e.target.value)
     setQuizData(prevQuizData => {
       const updatedQuestions = [...prevQuizData.questions];
@@ -108,10 +110,8 @@ const CreateQuiz = ({ onClose }) => {
         updatedQuestions[questionIndex].options[optionIndex].imageUrl = newOptionText;
         return { ...prevQuizData, questions: updatedQuestions };
       });}
-      console.log(quizData)
   };  
   const handleAddOption = () => {
-    console.log("Yo");
   
     if (quizData.questions[quizIndex].options.length < 4) { 
       setQuizData(prevQuizData => ({
@@ -147,16 +147,14 @@ const CreateQuiz = ({ onClose }) => {
   };
 
   const handleRemoveQuestion = (index) => {
-    console.log(quizData)
-    console.log(index)
+    // console.log(quizData)
+    // console.log(index)
     setQuizIndex(index-1)
 
     const updatedQuestions = [...quizData.questions];
     updatedQuestions.splice(index, 1);
     setQuizData({ ...quizData, questions: updatedQuestions });
   };
-
-  
 
   const handleRemoveOption = (questionIndex, optionIndex) => {
     setQuizData(prevQuizData => {
@@ -220,12 +218,19 @@ const CreateQuiz = ({ onClose }) => {
    
     if (isValid) {
       try {
-        await axios.post(`${BACKEND_URL}/api/quiz/create`, quizData, {
-          headers: { Authorization: localStorage.getItem('token') },
-        });
-        console.log(quizData)
+        const response = await axios.post(`${BACKEND_URL}/api/quiz/create`, quizData, {
+        headers: { Authorization: localStorage.getItem('token') },
+      });
+
+      console.log(quizData);
+      toast.success('Quiz created successfully!');
+      
+      // Access the _id from the response
+      const newQuizId = response.data._id; 
+      setLinkId(newQuizId); 
+      setCompleted(!completed)
         toast.success('Quiz created successfully!');
-        onClose(); 
+        
       } catch (error) {
         toast.error(error.response?.data?.error || 'Failed to create quiz');
       }
@@ -237,7 +242,7 @@ const CreateQuiz = ({ onClose }) => {
       <div className="content">
         {/* <span className="close" onClick={handleClose}>&times;</span> */}
         {/* <h2>Create New Quiz</h2> */}
-        <form onSubmit={handleSubmit}>
+        {!completed && <form onSubmit={handleSubmit}>
         {!quizType && (
         <>
           <div style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
@@ -526,7 +531,8 @@ const CreateQuiz = ({ onClose }) => {
              <div className='buttons'><button onClick={handleClose} className='cancel'>Cancel</button>
           <button className='createQuiz' type="submit">Create Quiz</button></div>
           </div>)}
-        </form>
+        </form>}
+        {completed && <CopyLink id={linkId} onClose={handleClose}/>}
       </div>
     </div>
   );

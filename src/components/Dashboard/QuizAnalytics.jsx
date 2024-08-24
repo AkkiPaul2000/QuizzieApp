@@ -59,6 +59,7 @@ function QuizAnalytics() {
               <th>Created on</th>
               <th>Impression</th>
               <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -73,6 +74,8 @@ function QuizAnalytics() {
                     Edit
                   </button>
                   <button className="share-btn">Share</button>
+                  </td>
+                  <td>
                   <a href="#" className="analysis-link">
                     Question Wise Analysis
                   </a>

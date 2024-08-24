@@ -41,9 +41,46 @@
     /* Enables horizontal scrolling if needed */
     overflow-y: auto;
     /* Enables vertical scrolling if needed */
-    border: 1px solid #ccc;
+}
+
+th:nth-child(1),
+td:nth-child(1) {
+    border-radius: 10px 0px 0px 10px;
+    /* Adjust the value as needed for the desired roundness */
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+    border-radius: 0px 10px 10px 0px;
+    /* Adjust the value as needed for the desired roundness */
+}
+
+.table-container {
+    /* ... other styles ... */
+    overflow-x: auto;
+    overflow-y: auto;
+    padding-right: 15px;
+    /* Add padding to the right for margin on the left of the scrollbar */
+}
+
+.table-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: transparent;
+    /* Make the track transparent */
+    /* You can also add a border here if you want a subtle outline */
+    /* border: 1px solid rgba(0, 0, 0, 0.1); */
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: #888;
     border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 
@@ -65,7 +102,7 @@ thead th {
     text-align: center;
     font-weight: bold;
     font-size: 16px;
-    border-bottom: 2px solid #ccc;
+    color: white;
 }
 
 
@@ -73,8 +110,12 @@ thead th {
 
 tbody td {
     padding: 10px;
-    border-bottom: 1px solid #e0e0e0;
-    font-size: 14px;
+    /* border-bottom: 1px solid #e0e0e0; */
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 40px;
+    text-align: center;
 }
 
 
@@ -91,7 +132,7 @@ tr:nth-child(even) td {
 th:nth-child(5),
 td:nth-child(5) {
     width: 40%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 
