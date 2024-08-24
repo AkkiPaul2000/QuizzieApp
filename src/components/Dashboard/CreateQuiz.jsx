@@ -484,13 +484,15 @@ const CreateQuiz = ({ onClose }) => {
                         </div>
                       ))}
                       {currentOptionsLength < 4 && (
-                        <button onClick={handleAddOption}>
+                        
+                        <button onClick={handleAddOption} >
                           Add Option
                         </button>
+                        
                       )}
                     </div>
                   )}
-                  <div className='timers'>
+                  {quizData.type === 'qna' && <div className='timers'>
                     <span>Timer</span>
                     <button style={{height:5}} className={quizData.questions[quizIndex].timer==null?'timer-active':''}
                     onClick={(e) => handleTimerChange(e,quizIndex, null)}
@@ -501,7 +503,7 @@ const CreateQuiz = ({ onClose }) => {
                     <button className={quizData.questions[quizIndex].timer==10?'timer-active':''}
                     onClick={(e) => handleTimerChange(e,quizIndex, 10)}
                     >10sec</button>
-                  </div>
+                  </div>}
                 </div>
               </div>
            
