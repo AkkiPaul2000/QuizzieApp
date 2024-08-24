@@ -328,15 +328,10 @@ const CreateQuiz = ({ onClose }) => {
               {/* Option Type */}
 
               <div className='typeButton1' style={{
-                margin: '10px 50px',
-                display: 'flex',
-                flexWrap: 'wrap',
-                alignItems: 'center',
                 
-                gap: '10px',
                
             }}>
-                <label htmlFor="type">Option Type</label>
+                <label htmlFor="type" style={{whiteSpace:'nowrap'}}>Option Type</label>
 
                 <label style={{ display: 'flex', alignItems: 'center' }}>
                     <input 
@@ -401,9 +396,11 @@ const CreateQuiz = ({ onClose }) => {
                     </div>
                   ))}
                   {currentOptionsLength < 4 && ( // Use currentOptionsLength in the condition
-                      <button onClick={handleAddOption} >
+                  <div className='addOption'>
+                      <button onClick={handleAddOption} className='addOption' id="addOption">
                         Add Option
                       </button>
+                      </div>
                     )}
                 </div>)}
                 {optionType === "imageUrl" && (
@@ -438,9 +435,11 @@ const CreateQuiz = ({ onClose }) => {
                         </div>
                       ))}
                       {currentOptionsLength < 4 && (
-                        <button onClick={handleAddOption}>
+                        <div className='addOption'>
+                        <button onClick={handleAddOption} className='addOption' id="addOption">
                           Add Option
                         </button>
+                        </div>
                       )}
                     </div>
                   )}
@@ -485,9 +484,11 @@ const CreateQuiz = ({ onClose }) => {
                       ))}
                       {currentOptionsLength < 4 && (
                         
-                        <button onClick={handleAddOption} >
-                          Add Option
-                        </button>
+                        <div className='addOption'>
+                      <button onClick={handleAddOption} className='addOption' id="addOption">
+                        Add Option
+                      </button>
+                      </div>
                         
                       )}
                     </div>

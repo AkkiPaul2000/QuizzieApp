@@ -24,7 +24,7 @@
 .content {
     display: flex;
     background-color: #fefefe;
-    padding: 70px;
+    padding: 30px 80px;
     border: 1px solid #888;
     width: 35%;
     /* Increased width to 80% */
@@ -39,7 +39,7 @@
     box-shadow: 0px 0px 25px 0px #00000026;
 }
 
-.modal .content input[type="text"] {
+.modal .content .quizName {
     background-color: #FFFFFF;
     font-family: Poppins;
     font-size: 25px;
@@ -49,7 +49,7 @@
     color: #9F9F9F;
 }
 
-.modal .content input[type="text"]::placeholder {
+.modal .content .quizName::placeholder {
     color: #9F9F9F;
     /* Placeholder text color */
     background-color: #FFFFFF;
@@ -149,30 +149,14 @@
 
 /* ////////////////////////////// */
 
-
-/* .typeButton1 label:nth-of-type(2) {
+form {
     display: flex;
-    flex: 2;
-    flex-direction: row;
+    flex-direction: column;
 }
 
-.typeButton1 label div {
+.quizDetails {
     display: flex;
-    flex-direction: row;
-    flex: 1;
-    justify-content: center;
-    align-items: center;
 }
-
-.typeButton1 label:first-child {
-    display: flex;
-    flex: 1;
-} */
-
-
-/* .typeButton1 div label:nth-of-type(2) {
-    background-color: red;
-} */
 
 .typeButton1 {
     display: flex;
@@ -185,7 +169,7 @@
     /* Take up the full width */
     margin: 10px 50px;
     /* Adjust margin as needed */
-    background-color: red;
+    /* background-color: red; */
     /* Remove red background */
 }
 
@@ -349,15 +333,17 @@ button {
 }
 
 .typeFields {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    /* background-color: red; */
 }
 
 .typeFields .optionGroup {
-    flex: 0.9;
+    flex: 1;
     display: flex;
-    background-color: red;
+    /* background-color: red; */
 }
 
 .typeFields .optionGroup .options {
@@ -387,46 +373,73 @@ button {
     margin-right: 10px;
 } */
 
-.option input[type="radio"]:checked+.radio-button input[type="text"] {
+.typeFields .optionGroup .options .option input[type="radio"]:checked+.radio-button input[type="text"] {
     background: #60B84B;
     color: #FFFFFF;
 }
 
-.option input[type="radio"]:checked+.radio-button input[type="url"] {
+.typeFields .optionGroup .options .option input[type="radio"]:checked+.radio-button input[type="url"] {
     background: #60B84B;
     color: #FFFFFF;
 }
 
-.option input[type="text"] {
+.typeFields .optionGroup .options .option input[type="text"] {
     flex: 1;
-    display: flex;
-    border: 1px solid #ccc;
-    /* padding: 5px 50px;
-    margin: 10px;
-    height: 30px; */
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 0px 0px 25px 0px #00000026;
-    font-weight: 500;
-    color: #9F9F9F;
-    justify-content: center;
-    align-items: center;
-}
-
-.option input[type="url"] {
-    flex: 1;
-    display: flex;
-    padding: 5px 50px;
-    border: 1px solid #ccc;
-    margin: 10px;
+    gap: 10px;
     height: 30px;
+    margin: 10px;
     border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 0px 0px 25px 0px #00000026;
-    font-weight: 500;
-    color: #9F9F9F;
+    opacity: 0px;
+    font-family: Poppins;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+    background: #FFFFFF;
+    color: var(--fontColor1);
+}
+
+.typeFields .optionGroup .options .option input[type="url"] {
+    background: #FFFFFF;
+    color: var(--fontColor1);
+    flex: 1;
+    height: 30px;
+    margin: 10px;
+    gap: 10px;
+    border-radius: 10px;
+    opacity: 0px;
+    font-family: Poppins;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+}
+
+.addOption {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    /* background-color: red; */
+}
+
+.addOption button {
+    background: #FFFFFF;
+    display: flex;
     justify-content: center;
     align-items: center;
+    color: var(--fontColor1);
+    flex: 0.7;
+    height: 30px;
+    margin: 10px;
+    gap: 10px;
+    border-radius: 10px;
+    opacity: 0px;
+    font-family: Poppins;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: left;
+    box-shadow: 0px 0px 15px 0px #00000026;
 }
 
 
@@ -445,12 +458,13 @@ button {
     font-weight: 400;
     font-size: 11px;
     flex: 1;
-    margin: 3px 0px;
+    margin: 10px;
+    width: 80px;
     border-radius: 10px;
     box-shadow: 0px 0px 15px 0px #00000026;
     border: #FFFFFF;
     background-color: #FFFFFF;
-    padding: 0px 30px;
+    /* padding: 0px 30px; */
     height: 25px;
     /* Adjust this value to your desired height */
     color: #9F9F9F;
