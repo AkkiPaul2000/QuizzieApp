@@ -143,13 +143,6 @@
 
 /* /////////////////////////////////////////////// */
 
-@media (max-width: 600px) {
-    .typeButton1 {
-        flex-direction: 'column';
-        align-items: 'flex-start';
-    }
-}
-
 
 /* Media query for smaller screens */
 
@@ -180,6 +173,37 @@
 /* .typeButton1 div label:nth-of-type(2) {
     background-color: red;
 } */
+
+.typeButton1 {
+    display: flex;
+    flex: 1;
+    color: white;
+    justify-content: space-around;
+    /* Distribute items evenly */
+    align-items: center;
+    width: 100%;
+    /* Take up the full width */
+    margin: 10px 50px;
+    /* Adjust margin as needed */
+    background-color: red;
+    /* Remove red background */
+}
+
+.typeButton1 label {
+    color: #9F9F9F;
+    display: flex;
+    align-items: center;
+    /* Other label styles as needed */
+}
+
+.typeButton1 label:first-child {
+    display: flex;
+    flex: 1;
+    /* background-color: rebeccapurple; */
+}
+
+
+/* Media query for smaller screens */
 
 .quizName {
     border-radius: 10px;
@@ -322,13 +346,6 @@ button {
     /* background-color: red; */
 }
 
-.typeButton1 {
-    display: flex;
-    color: white;
-    justify-content: center;
-    align-items: center;
-}
-
 .typeFields {
     display: flex;
     justify-content: center;
@@ -338,6 +355,7 @@ button {
 .typeFields .optionGroup {
     flex: 0.9;
     display: flex;
+    background-color: red;
 }
 
 .typeFields .optionGroup .options {
@@ -362,10 +380,10 @@ button {
     /* Vertically align items to the center */
 }
 
-.option input[type="radio"] {
+
+/* .option input[type="radio"] {
     margin-right: 10px;
-    /* Add some space between the radio button and the input */
-}
+} */
 
 .option input[type="radio"]:checked+.radio-button input[type="text"] {
     background: #60B84B;
@@ -380,10 +398,10 @@ button {
 .option input[type="text"] {
     flex: 1;
     display: flex;
-    padding: 5px 50px;
     border: 1px solid #ccc;
+    /* padding: 5px 50px;
     margin: 10px;
-    height: 30px;
+    height: 30px; */
     border-radius: 10px;
     cursor: pointer;
     box-shadow: 0px 0px 25px 0px #00000026;

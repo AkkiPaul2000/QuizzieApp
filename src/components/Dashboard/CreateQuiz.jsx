@@ -239,7 +239,7 @@ const CreateQuiz = ({ onClose }) => {
         {/* <h2>Create New Quiz</h2> */}
         <form onSubmit={handleSubmit}>
         {!quizType && (
-        <div >
+        <>
           <div style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
             <input
               type="text"
@@ -287,7 +287,7 @@ const CreateQuiz = ({ onClose }) => {
               Continue
             </button>
             </div>
-          </div>
+          </>
           )}
 
 
@@ -332,8 +332,9 @@ const CreateQuiz = ({ onClose }) => {
                 display: 'flex',
                 flexWrap: 'wrap',
                 alignItems: 'center',
+                
                 gap: '10px',
-                backgroundColor:'red'
+               
             }}>
                 <label htmlFor="type">Option Type</label>
 
