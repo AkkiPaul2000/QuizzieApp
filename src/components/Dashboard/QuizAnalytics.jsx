@@ -5,12 +5,19 @@ import axios from 'axios';
 import { BACKEND_URL } from '../../utils/constant';
 import EditQuizModal from './EditQuizModal';
 import './Analytics.css';
+import share from '../../assets/share.svg'
+import bin from '../../assets/bin.svg'
+import edit from '../../assets/edit.svg'
+import DelConfirm from './modals/DelConfirm';
+
 
 function QuizAnalytics() {
   const { user } = useAuth();
   const [quizzes, setQuizzes] = useState([]);
   const [selectedQuiz, setSelectedQuiz] = useState(null); // To store the quiz being edited
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [delModel, setDelModel] = useState(false);
+
 
   useEffect(() => {
     const fetchQuizzes = async () => {
@@ -35,8 +42,15 @@ function QuizAnalytics() {
     setSelectedQuiz(quiz);
     setIsEditModalOpen(true);
   };
-
-  const handleCloseModal = () => {
+  const handleDelClick = (quiz) => {
+    setSelectedQuiz(quiz);
+    setDelModel(true);
+  };
+  const handleCloseDelModal = () => {
+    setDelModel(false);
+    setSelectedQuiz(null);
+  };
+  const handleCloseEditModal = () => {
     setIsEditModalOpen(false);
     setSelectedQuiz(null);
   };
@@ -45,6 +59,7 @@ function QuizAnalytics() {
     console.log("updated Modal", updatedQuizData);
     toast.success('Quiz updated successfully!');
     setIsEditModalOpen(false); // Close modal on save
+    setDelModel(false)
   };
 
   return (
@@ -69,11 +84,16 @@ function QuizAnalytics() {
                 <td>{quiz.title}</td>
                 <td>01 Sep, 2023</td> {/* Replace with dynamic date if available */}
                 <td>{quiz.impressions}</td>
-                <td>
-                  <button className="edit-btn" onClick={() => handleEditClick(quiz)}>
-                    Edit
+                <td style={{whiteSpace:'nowrap'}}>
+                  <button className="edit-btn" style={{backgroundColor:'transparent'}}>
+                  <img style={{cursor: 'pointer' }} src={edit} alt="edit"/>
                   </button>
-                  <button className="share-btn">Share</button>
+                  <button className="delete-btn" onClick={(e)=>handleDelClick(quiz)} style={{backgroundColor:'transparent'}}>
+                  <img style={{cursor: 'pointer' }} src={bin} alt="delete"/>
+                  </button>
+                  <button className="share-btn" style={{backgroundColor:'transparent'}}>
+                  <img style={{cursor: 'pointer' }} src={share} alt="share"/>
+                  </button>
                   </td>
                   <td>
                   <a href="#" className="analysis-link">
@@ -88,7 +108,10 @@ function QuizAnalytics() {
 
       {/* Edit Quiz Modal */}
       {isEditModalOpen && selectedQuiz && (
-        <EditQuizModal quiz={selectedQuiz} onClose={handleCloseModal} onSave={handleSaveQuiz} />
+        <EditQuizModal quiz={selectedQuiz} onClose={handleCloseEditModal} onSave={handleSaveQuiz} />
+      )}
+      {delModel && selectedQuiz && (
+        <DelConfirm quiz={selectedQuiz} onClose={handleCloseDelModal} onSave={handleSaveQuiz} />
       )}
     </div>
   );

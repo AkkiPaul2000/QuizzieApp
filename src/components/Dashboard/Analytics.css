@@ -49,9 +49,10 @@ td:nth-child(1) {
     /* Adjust the value as needed for the desired roundness */
 }
 
-th:nth-child(5),
-td:nth-child(5) {
+th:nth-child(6),
+td:nth-child(6) {
     border-radius: 0px 10px 10px 0px;
+    width: 40%;
     /* Adjust the value as needed for the desired roundness */
 }
 
@@ -129,12 +130,6 @@ tr:nth-child(even) td {
 
 /* Set specific column widths */
 
-th:nth-child(5),
-td:nth-child(5) {
-    width: 40%;
-    /* border: 1px solid black; */
-}
-
 
 /* Button styles */
 
@@ -161,9 +156,10 @@ button {
 /* Link styles */
 
 .analysis-link {
-    text-decoration: none;
-    color: #4CAF50;
-    font-weight: bold;
+    display: flex;
+    justify-content: flex-start;
+    color: #000000;
+    text-decoration: underline;
 }
 
 
