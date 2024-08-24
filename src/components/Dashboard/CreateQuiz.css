@@ -343,7 +343,9 @@ button {
 .quizList {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     /* background-color: red; */
+    max-width: 600px;
 }
 
 .typeFields {
