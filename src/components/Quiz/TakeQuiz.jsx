@@ -22,7 +22,6 @@ function TakeQuiz() {
       try {
         const response = await axios.get(`${BACKEND_URL}/api/quiz/${quizId}`);
         setQuizData(response.data);
-        console.log("hey") 
         setTimeRemaining(response.data.questions[0].timer || 0); 
       } catch (error) {
         console.error('Error fetching quiz data:', error);
@@ -107,15 +106,25 @@ function TakeQuiz() {
   };
 
   return (
+    <div className="quiz-outerBox">
     <div className="quiz-container">
       {!isQuizFinished && quizData && (
         <div className="quiz-question">
-          <h3>{quizData.questions[currentQuestionIndex].questionText}</h3>
+          <div className='takeQuizHeader'>
+          <div className='questionIndex'>0{currentQuestionIndex+1}/0{quizData.questions.length}</div>  
+          {quizData.questions[currentQuestionIndex].timer !== null && (
+            <div className='quizTimer'>00:{timeRemaining}s</div>
+          )}
+        {/* <div className='quizTimer'>00:{timeRemaining}s</div> */}
+          </div>
+          
+          <div className='currentQues'>{quizData.questions[currentQuestionIndex].questionText}</div>
           {/* Render options based on the question type */}
+          <div className='optionList'>
           {quizData.questions[currentQuestionIndex].type==="text" && quizData.questions[currentQuestionIndex].options.map((option, index) => (
             <div
               key={index}
-              className={`quiz-option ${selectedAnswer === index ? 'selected' : ''}`}
+              className={` textQuiz-option ${selectedAnswer === index ? 'selected' : ''}`}
               onClick={() => handleAnswerSelect(index)}
             >
               {option.text && <span>{option.text}</span>}
@@ -125,7 +134,7 @@ function TakeQuiz() {
           {quizData.questions[currentQuestionIndex].type==="imageUrl" && quizData.questions[currentQuestionIndex].options.map((option, index) => (
             <div
               key={index}
-              className={`quiz-option ${selectedAnswer === index ? 'selected' : ''}`}
+              className={`imgQuiz-option ${selectedAnswer === index ? 'selected' : ''}`}
               onClick={() => handleAnswerSelect(index)}
             >
               {/* {option.text && <span>{option.text}</span>} */}
@@ -135,20 +144,19 @@ function TakeQuiz() {
           {quizData.questions[currentQuestionIndex].type==="both" && quizData.questions[currentQuestionIndex].options.map((option, index) => (
             <div
               key={index}
-              className={`quiz-option ${selectedAnswer === index ? 'selected' : ''}`}
+              className={`bothQuiz-option ${selectedAnswer === index ? 'selected' : ''}`}
               onClick={() => handleAnswerSelect(index)}
             >
               {option.text && <span>{option.text}</span>}
               {option.imageUrl && <img src={option.imageUrl} alt={`Option ${index + 1}`} />}
             </div>
           ))}
-
+          
           {/* Display timer if the timer is set for the current question */}
-          {quizData.questions[currentQuestionIndex].timer !== null && (
-            <p>Time remaining: {timeRemaining} seconds</p>
-          )}
+          
 
           {/* Submit Button */}
+          <div className="textQuiz-option button">
           <button
             className="submit-button"
             onClick={handleSubmit}
@@ -156,6 +164,8 @@ function TakeQuiz() {
           >
             Submit
           </button>
+          </div>
+          </div>
         </div>
       )}
 
@@ -172,6 +182,7 @@ function TakeQuiz() {
           <p>Thank you for participating.</p>
         </div>
       )}
+    </div>
     </div>
   );
 }
