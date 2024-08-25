@@ -13,6 +13,7 @@ import Sidebar from './components/common/Sidebar'; // Import Sidebar
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.css';
+import QuestionAnalysis from './components/Dashboard/QuestionAnalysis';
 
 
 const ProtectedRoute = ({ children }) => {
@@ -60,7 +61,14 @@ const MainApp = () => {
               }
             />
             <Route path="/quiz/:id" element={<TakeQuiz />} />
-            <Route path="/quiz/result/:id" element={<QuizResult />} />
+            <Route
+              path="/quiz/analysis/:id"
+              element={
+                <ProtectedRoute>
+                  <QuestionAnalysis />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </div>
       </Router>

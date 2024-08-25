@@ -2,18 +2,14 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    overflow-y: hidden;
 }
-
-
-/* .dashboardPage div:nth-child(1){
-    background-color: black;
-} */
 
 .statGrid {
     display: flex;
     /* grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); */
     /* Responsive columns */
-    gap: 20px;
+    gap: 40px;
     flex: 1;
     justify-content: center;
     align-items: center;
@@ -23,7 +19,7 @@
 
 .stats {
     /* Center align text within each stat */
-    padding: 20px;
+    padding: 20px 80px;
     /* Add padding for visual spacing */
     border-radius: 10px;
     /* Rounded corners */
@@ -132,4 +128,8 @@
     font-weight: 600;
     line-height: 16.5px;
     text-align: left;
+}
+
+.trendQuizGrp a {
+    text-decoration: none;
 }

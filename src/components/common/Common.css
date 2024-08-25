@@ -1,7 +1,14 @@
 aside {
     display: flex;
+    flex: 0.3;
     flex-direction: column;
-    padding: 20px;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    /* Ensures the whole container takes up exactly 100vh */
+    padding: 0 20px;
+    background-color: #f9f9f9;
+    overflow: hidden;
 }
 
 aside .navButtons {
