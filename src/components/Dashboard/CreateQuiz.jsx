@@ -29,7 +29,7 @@ const CreateQuiz = ({ onClose }) => {
   // }, [onClose]);
 
 
-  
+
    const [quizType,setQuizType]=useState(false)
   const [quizIndex,setQuizIndex]=useState(0)
   const [optionType,setOptionType]=useState("text")
@@ -226,9 +226,26 @@ const CreateQuiz = ({ onClose }) => {
               }
           });
       }
-        if(question.type==="both"){
-          question.options.map(option=>{console.log("error check1",option);if(option.text.trim() === ''|| option.imageUrl.trim() === '' ){condion1=true}})
-        }
+        if (question.type === "both") {
+  question.options.map(option => {
+    console.log("error check1", option);
+
+    // Check if either text or imageUrl is empty after trimming
+    if (option.text.trim() === '' || option.imageUrl.trim() === '') {
+      condion1 = true; 
+    } 
+
+    // Check if imageUrl is present and valid
+    if (option.imageUrl.trim() !== '') { 
+      const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+      if (!urlPattern.test(option.imageUrl)) {
+        console.log("Invalid URL:", option.imageUrl);
+        condion1 = true; 
+        toast.error('Fill up the URL correctly'); 
+      }
+    }
+  });
+}
   });
    
     

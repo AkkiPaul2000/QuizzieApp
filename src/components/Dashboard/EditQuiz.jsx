@@ -45,6 +45,15 @@ const EditQuiz = ({ quiz, onClose, onSave }) => {
 
 
   }
+  const handleQuestionNavigate = (newIndex) => {
+    // Ensure the newIndex is within bounds
+    const validIndex = Math.max(0, Math.min(newIndex, quizData.questions.length - 1));
+    setQuizIndex(validIndex);
+
+    // Update optionType based on the navigated question
+    setOptionType(quizData.questions[validIndex].type || 'text');
+  };
+
   const handleOptionType=(e,questionIndex)=>{
     setOptionType(e.target.value)
     setQuizData(prevQuizData => {
@@ -195,9 +204,26 @@ const EditQuiz = ({ quiz, onClose, onSave }) => {
               }
           });
       }
-        if(question.type==="both"){
-          question.options.map(option=>{console.log("error check1",option);if(option.text.trim() === ''|| option.imageUrl.trim() === '' ){condion1=true}})
-        }
+      if (question.type === "both") {
+        question.options.map(option => {
+          console.log("error check1", option);
+      
+          // Check if either text or imageUrl is empty after trimming
+          if (option.text.trim() === '' || option.imageUrl.trim() === '') {
+            condion1 = true; 
+          } 
+      
+          // Check if imageUrl is present and valid
+          if (option.imageUrl.trim() !== '') { 
+            const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+            if (!urlPattern.test(option.imageUrl)) {
+              console.log("Invalid URL:", option.imageUrl);
+              condion1 = true; 
+              toast.error('Fill up the URL correctly'); 
+            }
+          }
+        });
+      }
   });
    
     
@@ -229,6 +255,22 @@ const EditQuiz = ({ quiz, onClose, onSave }) => {
       <div className="content" style={{flexDirection:'column'}}>
         <span className="close" onClick={onClose}>&times;</span>
         <h2>Edit Quiz</h2> {/* Change the heading */}
+        <div className='quizList'>
+            {/* number section */}
+            <div className='indexGrp' style={{display:'flex',flexDirection:'row'}}>
+              {quizData.questions.map((question, index) => (
+                <div className='quizIndex' key={index}>
+                  <span
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => handleQuestionNavigate(index)}
+                    className={quizIndex === index ? 'activeQuestion' : ''} // Add active class
+                  >
+                    {index + 1}
+                  </span>
+                </div>
+              ))}
+            </div>
+            </div>
         <form onSubmit={handleSubmit}>
           {quiz&& (
             <div className='quizList'>
@@ -250,6 +292,7 @@ const EditQuiz = ({ quiz, onClose, onSave }) => {
               </div>
 
               {/* detail section */}
+              {/* detail section */}
               <div className='quizDetails'>
                 {/* Option Type */}
                 <div className='typeButton1'>
@@ -268,10 +311,33 @@ const EditQuiz = ({ quiz, onClose, onSave }) => {
                     <div className="radio-button" style={{ marginLeft: '5px' }}>Text</div>
                   </label>
 
-                  {/* ... other option type radio buttons (similarly disabled) ... */}
-                </div>
-              </div>
+                  {/* Image URL */}
+                  <label style={{ display: 'flex', alignItems: 'center' }}>
+                    <input
+                      type="radio"
+                      name="type"
+                      value="imageUrl"
+                      checked={optionType === 'imageUrl'}
+                      onChange={(e) => toast.warning("You can't change the option type while editing.")}
+                      disabled
+                    />
+                    <div className="radio-button" style={{ marginLeft: '5px', whiteSpace: 'nowrap' }}>Image URL</div>
+                  </label>
 
+                  {/* Text & Image URL */}
+                  <label style={{ display: 'flex', alignItems: 'center' }}>
+                    <input
+                      type="radio"
+                      name="type"
+                      value="both"
+                      checked={optionType === 'both'}
+                      onChange={(e) => toast.warning("You can't change the option type while editing.")}
+                      disabled
+                    />
+                    <div className="radio-button" style={{ marginLeft: '5px', whiteSpace: 'nowrap' }}>Text & Image URL</div>
+                  </label>
+                </div> {/* End of .typeButton1 */}
+              </div> {/* End of .quizDetails */}
               {/* Conditional input rendering */}
               {/* Text */}
               {quizData.type === 'qna' && (
@@ -281,6 +347,7 @@ const EditQuiz = ({ quiz, onClose, onSave }) => {
                       <div className='options'>
                         {quizData.questions[quizIndex].options.map((opt, optionIndex) => (
                           <div className='option' key={optionIndex}>
+                            
                             <label key={optionIndex}>
                               <input
                                 type="radio"
@@ -294,6 +361,10 @@ const EditQuiz = ({ quiz, onClose, onSave }) => {
                                 <input
                                   type="text"
                                   value={opt.text}
+                                  style={{ 
+                                    backgroundColor: quizData.questions[quizIndex].correctAnswer == optionIndex ? 'green' : 'white', 
+                                    color: quizData.questions[quizIndex].correctAnswer == optionIndex ? 'white' : 'black' 
+                                  }} 
                                   onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value, "text")}
                                 />
                               </span>
@@ -304,6 +375,84 @@ const EditQuiz = ({ quiz, onClose, onSave }) => {
                         {/* Disable adding options */}
                       </div>
                     )}
+                    {optionType === "imageUrl" && (
+                    <div className='options'>
+                      {quizData.questions[quizIndex].options.map((opt, optionIndex) => (
+                        <div className='option' key={optionIndex}>
+                          <label key={optionIndex}>
+                            {quizData.type === 'qna' && ( 
+                              <input
+                                type="radio"
+                                name={`question-${quizIndex}-options`}
+                                value={optionIndex}
+                                checked={quizData.questions[quizIndex].correctAnswer === optionIndex}
+                                onChange={() => toast.warning("You can't change the correct answer while editing.")}
+                                disabled 
+                              />
+                            )}
+                            <span className="radio-button">
+                              <input
+                                type="url"
+                                value={opt.imageUrl}
+                                style={{ 
+                                    backgroundColor: quizData.questions[quizIndex].correctAnswer == optionIndex ? 'green' : 'white', 
+                                    color: quizData.questions[quizIndex].correctAnswer == optionIndex ? 'white' : 'black' 
+                                  }} 
+                                onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value, "imageUrl")}
+                                placeholder="Enter image URL"
+                              />
+                            </span>
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {optionType === "both" && (
+                    <div className='options'>
+                      {quizData.questions[quizIndex].options.map((opt, optionIndex) => (
+                        
+                        <div className='option' key={optionIndex}>
+                            
+                          <label key={optionIndex}>
+                            {quizData.type === 'qna' && (
+                              <input
+                                type="radio"
+                                name={`question-${quizIndex}-options`}
+                                value={optionIndex}
+                                checked={quizData.questions[quizIndex].correctAnswer === optionIndex}
+                                onChange={() => toast.warning("You can't change the correct answer while editing.")}
+                                disabled
+                              />
+                            )}
+                            <span className="radio-button">
+                              <input
+                                type="text"
+                                value={opt.text}
+                                style={{ 
+                                    backgroundColor: quizData.questions[quizIndex].correctAnswer == optionIndex ? 'green' : 'white', 
+                                    color: quizData.questions[quizIndex].correctAnswer == optionIndex ? 'white' : 'black' 
+                                  }} 
+                                onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value, "text")}
+                              />
+                            </span>
+                            <span className="radio-button">
+                              <input
+                                type="url" 
+                                value={opt.imageUrl}
+                                style={{ 
+                                    backgroundColor: quizData.questions[quizIndex].correctAnswer == optionIndex ? 'green' : 'white', 
+                                    color: quizData.questions[quizIndex].correctAnswer == optionIndex ? 'white' : 'black' 
+                                  }} 
+                                onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value, "imageUrl")}
+                                placeholder="Enter image URL"
+                              />
+                            </span>
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  )}
 
                     {/* Image URL and Both options - similar handling for radio buttons and add/remove options */}
                     {/* ... */}

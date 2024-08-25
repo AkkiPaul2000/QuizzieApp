@@ -445,7 +445,7 @@ button {
 
 /* Allow the input to grow and take up available space */
 
-.typeFields .optionGroup .timers {
+.timers {
     flex: 1;
     display: flex;
     align-items: center;
@@ -454,7 +454,7 @@ button {
     margin-top: 3rem;
 }
 
-.typeFields .optionGroup .timers button {
+.timers button {
     font-weight: 400;
     font-size: 11px;
     flex: 1;
@@ -470,11 +470,11 @@ button {
     color: #9F9F9F;
 }
 
-.typeFields .optionGroup .timers span {
+.timers span {
     color: #9F9F9F;
 }
 
-.typeFields .optionGroup .timers .timer-active {
+.timers .timer-active {
     background-color: green;
     color: white;
 }
