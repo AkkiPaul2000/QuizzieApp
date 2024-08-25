@@ -27,6 +27,8 @@ const CreateQuiz = ({ onClose }) => {
 
   //   };
   // }, [onClose]);
+
+
   
    const [quizType,setQuizType]=useState(false)
   const [quizIndex,setQuizIndex]=useState(0)
@@ -176,13 +178,15 @@ const CreateQuiz = ({ onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+    console.log(quizData)
+
     let isValid = true; // Flag to track validation status
   
     // Check if correctAnswer is within the bounds of options
     quizData.questions.forEach((ques) => {
       if (ques.options.length - 1 < ques.correctAnswer) {
         toast.error('Check your answers - Correct answer index is out of bounds.');
+        console.log("Error0")
         isValid = false; // Set the flag to false if there's an error
       }
     });
@@ -190,32 +194,52 @@ const CreateQuiz = ({ onClose }) => {
     // Other validation checks (title, questionText, empty options)
     if (!quizData.title || quizData.questions.some(q => !q.questionText)) {
       toast.error('Please fill in all required fields.');
+      console.log("Error1")
       isValid = false;
     }
-  
+  var condion1=false;
     var hasEmptyOptions = quizData.questions.some(question => 
       question.options.some(option => option.text.trim() === '' && option.imageUrl.trim() === '')
     );
-    if (optionType === "both") {
-      hasEmptyOptions = quizData.questions.some(question => 
-        question.options.some(option => option.text.trim() === '' || option.imageUrl.trim() === '')
-      );
-    }
-    if (optionType === "text") {
-      hasEmptyOptions = quizData.questions.some(question => 
-        question.options.some(option => option.text.trim() === '')
-      );
-    }
-    if (optionType === "imageUrl") {
-      hasEmptyOptions = quizData.questions.some(question => 
-        question.options.some(option =>option.imageUrl.trim() === '')
-      );
-    }
-    if (hasEmptyOptions) {
+    console.log("Error1",hasEmptyOptions,condion1)
+
+    quizData.questions.map(question => {
+      console.log("error check",question)
+        if(question.type==="text"){
+          question.options.map(option=>{console.log("error check1",option);if(option.text.trim() === ''){condion1=true}})
+        }
+        if (question.type === "imageUrl") {
+          question.options.map(option => {
+              console.log("error check1", option);
+      
+              // Check if imageUrl is empty after trimming
+              if (option.imageUrl.trim() === '') {
+                  condion1 = true; 
+              } else {
+                  // Check if imageUrl is a valid URL (using a simple regex)
+                  const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+                  if (!urlPattern.test(option.imageUrl)) {
+                      console.log("Invalid URL:", option.imageUrl); // Or set another flag for invalid URLs
+                      condion1 = true; 
+                      toast.error('fillup the url correctly');
+                  }
+              }
+          });
+      }
+        if(question.type==="both"){
+          question.options.map(option=>{console.log("error check1",option);if(option.text.trim() === ''|| option.imageUrl.trim() === '' ){condion1=true}})
+        }
+  });
+   
+    
+    
+    console.log("Error2",hasEmptyOptions,condion1)
+    if (hasEmptyOptions || condion1) {
       toast.error('Please fill in all option fields.');
       isValid = false;
     }
-   
+    console.log("Error6",hasEmptyOptions)
+
     if (isValid) {
       try {
         const response = await axios.post(`${BACKEND_URL}/api/quiz/create`, quizData, {
@@ -376,7 +400,7 @@ const CreateQuiz = ({ onClose }) => {
             {/* Conditional input rendering */}
             {/* Text */}
             
-            <div className='typeFields'  >
+            {quizData.type === 'qna' && <div className='typeFields'  >
                 <div className='optionGroup'>
                 {optionType=="text"  &&(<div className='options'>
                   {quizData.questions[quizIndex].options.map((opt, optionIndex) => (
@@ -511,8 +535,125 @@ const CreateQuiz = ({ onClose }) => {
                     >10sec</button>
                   </div>}
                 </div>
-              </div>
-           
+              </div>}
+              {quizData.type === 'poll' && <div className='typeFields'  >
+                <div className='optionGroup'>
+                {optionType=="text"  &&(<div className='options'>
+                  {quizData.questions[quizIndex].options.map((opt, optionIndex) => (
+                    <div className='option' key={optionIndex}> 
+                      <label key={optionIndex}>
+                      
+                      <span className="radio-button">
+                        <input // Add an input field for editing
+                          type="text"
+                          value={opt.text}
+                          onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value,"text")}
+                        />
+                      </span> 
+                      {optionIndex>1 && <img style={{marginLeft:10,cursor:'pointer'}}src={bin} alt="delete" onClick={() => handleRemoveOption(quizIndex, optionIndex)} />}
+                    </label>
+                    </div>
+                  ))}
+                  {currentOptionsLength < 4 && ( // Use currentOptionsLength in the condition
+                  <div className='addOption'>
+                      <button onClick={handleAddOption} className='addOption' id="addOption">
+                        Add Option
+                      </button>
+                      </div>
+                    )}
+                </div>)}
+                {optionType === "imageUrl" && (
+                    <div className='options'>
+                      {quizData.questions[quizIndex].options.map((opt, optionIndex) => (
+                        <div className='option' key={optionIndex}>
+                          <label key={optionIndex}>
+                            
+                            <span className="radio-button">
+                              <input // Input field for image URLs
+                                type="url" // Change to 'url' for URL validation
+                                value={opt.imageUrl}
+                                onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value,"imageUrl")}
+                                placeholder="Enter image URL"
+                              />
+                            </span>
+                            {optionIndex > 1 && (
+                              <img
+                                style={{ marginLeft: 10, cursor: 'pointer' }}
+                                src={bin}
+                                alt="delete"
+                                onClick={() => handleRemoveOption(quizIndex, optionIndex)}
+                              />
+                            )}
+                          </label>
+                        </div>
+                      ))}
+                      {currentOptionsLength < 4 && (
+                        <div className='addOption'>
+                        <button onClick={handleAddOption} className='addOption' id="addOption">
+                          Add Option
+                        </button>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  {/* TODO fix both selected input as green color */}
+                  {optionType === "both" && (
+                    <div className='options'>
+                      {quizData.questions[quizIndex].options.map((opt, optionIndex) => (
+                        <div className='option' key={optionIndex}>
+                          <label key={optionIndex}>
+                            
+                            <span className="radio-button">
+                              <input // Add an input field for editing
+                                type="text"
+                                value={opt.text}
+                                onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value,"text")}
+                              />
+                            </span> 
+                            <span className="radio-button">
+                              <input // Input field for image URLs
+                                type="url" // Change to 'url' for URL validation
+                                value={opt.imageUrl}
+                                onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value,"imageUrl")}
+                                placeholder="Enter image URL"
+                              />
+                            </span>
+                            {optionIndex > 1 && (
+                              <img
+                                style={{ marginLeft: 10, cursor: 'pointer' }}
+                                src={bin}
+                                alt="delete"
+                                onClick={() => handleRemoveOption(quizIndex, optionIndex)}
+                              />
+                            )}
+                          </label>
+                        </div>
+                      ))}
+                      {currentOptionsLength < 4 && (
+                        
+                        <div className='addOption'>
+                      <button onClick={handleAddOption} className='addOption' id="addOption">
+                        Add Option
+                      </button>
+                      </div>
+                        
+                      )}
+                    </div>
+                  )}
+                  {quizData.type === 'qna' && <div className='timers'>
+                    <span>Timer</span>
+                    <button style={{height:5}} className={quizData.questions[quizIndex].timer==null?'timer-active':''}
+                    onClick={(e) => handleTimerChange(e,quizIndex, null)}
+                    >OFF</button>
+                    <button className={quizData.questions[quizIndex].timer==5?'timer-active':''}
+                    onClick={(e) => handleTimerChange(e,quizIndex, 5)}
+                    >5sec</button>
+                    <button className={quizData.questions[quizIndex].timer==10?'timer-active':''}
+                    onClick={(e) => handleTimerChange(e,quizIndex, 10)}
+                    >10sec</button>
+                  </div>}
+                </div>
+              </div>}
 
             {/* Image */}
 

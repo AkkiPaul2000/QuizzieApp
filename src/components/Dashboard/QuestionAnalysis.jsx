@@ -1,11 +1,33 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import './QuestionAnalysis.css'
+import { useAuth } from '../../utils/auth';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { BACKEND_URL } from '../../utils/constant';
 
 const QuestionAnalysis = () => {
-  const location = useLocation();
-  const { quiz } = location.state || {}; // Access quiz data from the state
-console.log(quiz)
+  const { id } = useParams();
+  const { user } = useAuth();
+  const [quiz, setQuizzes] = useState([])
+  useEffect(() => {
+    const fetchQuizzes = async () => {
+      try {
+        const response = await axios.get(`${BACKEND_URL}/api/quiz/${id}`, {
+          headers: { Authorization: localStorage.getItem('token') },
+        });
+        setQuizzes(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+        toast.error(error.response?.data?.error || 'Failed to fetch quizzes');
+      }
+    };
+
+    if (user) {
+      fetchQuizzes();
+    }
+  }, [user]);
   if (!quiz) {
     return <div>No quiz data available</div>;
   }

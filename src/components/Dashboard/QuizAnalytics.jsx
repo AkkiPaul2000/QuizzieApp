@@ -3,13 +3,13 @@ import { useAuth } from '../../utils/auth';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { BACKEND_URL, FRONTEND_URL } from '../../utils/constant';
-import EditQuizModal from './EditQuizModal';
 import './Analytics.css';
 import share from '../../assets/share.svg'
 import bin from '../../assets/bin.svg'
 import edit from '../../assets/edit.svg'
 import DelConfirm from './modals/DelConfirm';
 import { Link } from 'react-router-dom';
+import EditQuiz from './EditQuiz';
 
 
 function QuizAnalytics() {
@@ -53,7 +53,7 @@ function QuizAnalytics() {
   }, [user]);
 
   const handleEditClick = (quiz) => {
-    setSelectedQuiz(quiz);
+    setSelectedQuiz(quiz); // Pass the entire quiz object
     setIsEditModalOpen(true);
   };
   const handleDelClick = (quiz) => {
@@ -114,7 +114,11 @@ function QuizAnalytics() {
                 <td>01 Sep, 2023</td> {/* Replace with dynamic date if available */}
                 <td>{quiz.impressions}</td>
                 <td style={{whiteSpace:'nowrap'}}>
-                  <button className="edit-btn" style={{backgroundColor:'transparent'}}>
+                <button 
+                className="edit-btn" 
+                style={{ backgroundColor: 'transparent' }} 
+                onClick={() => handleEditClick(quiz)} // Pass the quiz object
+              >
                   <img style={{cursor: 'pointer' }} src={edit} alt="edit"/>
                   </button>
                   <button className="delete-btn" onClick={(e)=>handleDelClick(quiz._id)} style={{backgroundColor:'transparent'}}>
@@ -140,8 +144,9 @@ function QuizAnalytics() {
       </div>
 
       {/* Edit Quiz Modal */}
-      {isEditModalOpen && selectedQuiz && (
-        <EditQuizModal quiz={selectedQuiz} onClose={handleCloseEditModal} onSave={handleSaveQuiz} />
+      
+      {isEditModalOpen && selectedQuiz && ( 
+        <EditQuiz quiz={selectedQuiz} onClose={handleCloseEditModal} onSave={handleSaveQuiz} />
       )}
       {delModel && selectedQuiz && (
         <DelConfirm quiz={selectedQuiz} onClose={handleCloseDelModal} onDelete={handleDeleteQuiz} />
