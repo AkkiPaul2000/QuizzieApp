@@ -9,6 +9,7 @@ import share from '../../assets/share.svg'
 import bin from '../../assets/bin.svg'
 import edit from '../../assets/edit.svg'
 import DelConfirm from './modals/DelConfirm';
+import { Link } from 'react-router-dom';
 
 
 function QuizAnalytics() {
@@ -124,9 +125,13 @@ function QuizAnalytics() {
                   </button>
                   </td>
                   <td>
-                  <a href="#" className="analysis-link">
+                  <Link
+                    to={`/quiz/analysis/${quiz._id}`}
+                    className="analysis-link"
+                    state={{ quiz }} // Passing quiz data through Link
+                  >
                     Question Wise Analysis
-                  </a>
+                  </Link>
                 </td>
               </tr>
             ))}

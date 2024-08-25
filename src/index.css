@@ -57,6 +57,7 @@ body {
     display: flex;
     /* Main content takes 2/3 of the width */
     background-color: #EDEDED;
+    overflow-y: auto;
     /* Apply background color to the main content area */
 }
 

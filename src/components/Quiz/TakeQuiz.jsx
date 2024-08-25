@@ -79,6 +79,19 @@ function TakeQuiz() {
     setUserAnswers([...userAnswers, selectedAnswer]);
     // console.log(currentQuestion)
 
+    try {
+      // Increment clicked count for the selected option
+      if (selectedAnswer !== null) {
+        await axios.patch(`${BACKEND_URL}/api/quiz/increment-option-clicked/${quizId}`, {
+          questionIndex: currentQuestionIndex,
+          optionIndex: selectedAnswer,
+        });
+      }
+
+      // ... (rest of your handleSubmit logic for checking answers, updating score, etc.)
+    } catch (error) {
+      console.error('Error updating quiz stats or fetching next question:', error);
+    }
     // Check if the selected answer is correct for Q&A quizzes
     if (quizData.type === 'qna' && selectedAnswer !== null && selectedAnswer.toString() === correctAnswerIndex) {
       try {
