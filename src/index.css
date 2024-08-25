@@ -54,6 +54,7 @@ body {
 
 .main-content {
     flex: 2;
+    display: flex;
     /* Main content takes 2/3 of the width */
     background-color: #EDEDED;
     /* Apply background color to the main content area */
