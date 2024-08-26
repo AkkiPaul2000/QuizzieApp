@@ -3,9 +3,9 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import { BACKEND_URL } from '../../utils/constant';
 import './CreateQuiz.css'; // You might want to create a separate CSS file for editing
-import plus from '../../assets/plus.svg';
-import bin from '../../assets/bin.svg';
-import cross from '../../assets/cross.svg';
+// import plus from '../../assets/plus.svg';
+// import bin from '../../assets/bin.svg';
+// import cross from '../../assets/cross.svg';
 
 const EditQuiz = ({ quiz, onClose, onSave }) => {
   const [quizData, setQuizData] = useState({ ...quiz }); // Initialize with the quiz data
@@ -279,7 +279,6 @@ const EditQuiz = ({ quiz, onClose, onSave }) => {
               {/* QNA/Poll Question */}
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <input
-                  type="text"
                   id="title"
                   name="title"
                   value={quizData.questions[quizIndex].questionText}
@@ -362,8 +361,8 @@ const EditQuiz = ({ quiz, onClose, onSave }) => {
                                   type="text"
                                   value={opt.text}
                                   style={{ 
-                                    backgroundColor: quizData.questions[quizIndex].correctAnswer == optionIndex ? 'green' : 'white', 
-                                    color: quizData.questions[quizIndex].correctAnswer == optionIndex ? 'white' : 'black' 
+                                    backgroundColor: quizData.questions[quizIndex].correctAnswer == optionIndex ? '#60B84B' : 'white', 
+                                    color: quizData.questions[quizIndex].correctAnswer == optionIndex ? 'white' : '#474444' 
                                   }} 
                                   onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value, "text")}
                                 />
@@ -395,8 +394,8 @@ const EditQuiz = ({ quiz, onClose, onSave }) => {
                                 type="url"
                                 value={opt.imageUrl}
                                 style={{ 
-                                    backgroundColor: quizData.questions[quizIndex].correctAnswer == optionIndex ? 'green' : 'white', 
-                                    color: quizData.questions[quizIndex].correctAnswer == optionIndex ? 'white' : 'black' 
+                                    backgroundColor: quizData.questions[quizIndex].correctAnswer == optionIndex ? '#60B84B' : 'white', 
+                                    color: quizData.questions[quizIndex].correctAnswer == optionIndex ? 'white' : '#474444' 
                                   }} 
                                 onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value, "imageUrl")}
                                 placeholder="Enter image URL"
@@ -430,8 +429,8 @@ const EditQuiz = ({ quiz, onClose, onSave }) => {
                                 type="text"
                                 value={opt.text}
                                 style={{ 
-                                    backgroundColor: quizData.questions[quizIndex].correctAnswer == optionIndex ? 'green' : 'white', 
-                                    color: quizData.questions[quizIndex].correctAnswer == optionIndex ? 'white' : 'black' 
+                                    backgroundColor: quizData.questions[quizIndex].correctAnswer == optionIndex ? '#60B84B' : 'white', 
+                                    color: quizData.questions[quizIndex].correctAnswer == optionIndex ? 'white' : '#474444' 
                                   }} 
                                 onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value, "text")}
                               />
@@ -441,8 +440,8 @@ const EditQuiz = ({ quiz, onClose, onSave }) => {
                                 type="url" 
                                 value={opt.imageUrl}
                                 style={{ 
-                                    backgroundColor: quizData.questions[quizIndex].correctAnswer == optionIndex ? 'green' : 'white', 
-                                    color: quizData.questions[quizIndex].correctAnswer == optionIndex ? 'white' : 'black' 
+                                    backgroundColor: quizData.questions[quizIndex].correctAnswer == optionIndex ? '#60B84B' : 'white', 
+                                    color: quizData.questions[quizIndex].correctAnswer == optionIndex ? 'white' : '#474444' 
                                   }} 
                                 onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value, "imageUrl")}
                                 placeholder="Enter image URL"

@@ -434,6 +434,7 @@ const CreateQuiz = ({ onClose }) => {
                         <input // Add an input field for editing
                           type="text"
                           value={opt.text}
+                          placeholder="Text"
                           onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value,"text")}
                         />
                       </span> 
@@ -506,6 +507,8 @@ const CreateQuiz = ({ onClose }) => {
                               <input // Add an input field for editing
                                 type="text"
                                 value={opt.text}
+                                checked={quizData.questions[quizIndex].correctAnswer === optionIndex}
+                                placeholder="Text"
                                 onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value,"text")}
                               />
                             </span> 
@@ -513,6 +516,12 @@ const CreateQuiz = ({ onClose }) => {
                               <input // Input field for image URLs
                                 type="url" // Change to 'url' for URL validation
                                 value={opt.imageUrl}
+                                checked={quizData.questions[quizIndex].correctAnswer === optionIndex}
+                                style={{ 
+                                  backgroundColor: quizData.questions[quizIndex].correctAnswer == optionIndex ? '#60B84B' : 'white', 
+                                  color: quizData.questions[quizIndex].correctAnswer === optionIndex ? '#FFFFFF' : '#474444',
+                                  // ... other styles (outline, word-wrap, etc.)
+                                }} 
                                 onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value,"imageUrl")}
                                 placeholder="Enter image URL"
                               />
@@ -563,6 +572,7 @@ const CreateQuiz = ({ onClose }) => {
                       <span className="radio-button">
                         <input // Add an input field for editing
                           type="text"
+                          placeholder='Text'
                           value={opt.text}
                           onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value,"text")}
                         />
@@ -624,6 +634,7 @@ const CreateQuiz = ({ onClose }) => {
                               <input // Add an input field for editing
                                 type="text"
                                 value={opt.text}
+                                placeholder='Text'
                                 onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value,"text")}
                               />
                             </span> 
