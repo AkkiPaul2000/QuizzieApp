@@ -133,7 +133,7 @@ function TakeQuiz() {
         {/* <div className='quizTimer'>00:{timeRemaining}s</div> */}
           </div>
           
-          <div className='currentQues'>{quizData.questions[currentQuestionIndex].questionText}</div>
+          <div className='currentQues'><span>{quizData.questions[currentQuestionIndex].questionText}</span></div>
           {/* Render options based on the question type */}
           <div className='optionList'>
           {quizData.questions[currentQuestionIndex].type==="text" && quizData.questions[currentQuestionIndex].options.map((option, index) => (
@@ -172,7 +172,9 @@ function TakeQuiz() {
           
 
           {/* Submit Button */}
-          <div className="textQuiz-option button">
+          
+          </div>
+          <div className=" buttonDiv">
           <button
             className="submit-button"
             onClick={handleSubmit}
@@ -180,7 +182,6 @@ function TakeQuiz() {
           >
             Submit
           </button>
-          </div>
           </div>
         </div>
       )}
