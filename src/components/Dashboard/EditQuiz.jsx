@@ -484,9 +484,75 @@ const EditQuiz = ({ quiz, onClose, onSave }) => {
 
               {quizData.type === 'poll' && ( 
                 <div className='typeFields'>
-                  <div className='optionGroup'>
-                    {/* ... similar logic for Poll type, but without correct answer radio buttons */}
-                  </div>
+                   <div className='optionGroup'>
+                    {/* Text options for Poll type */}
+                    {optionType === "text" && (
+                      <div className='options'>
+                        {quizData.questions[quizIndex].options.map((opt, optionIndex) => (
+                          <div className='option' key={optionIndex}>
+                            <label key={optionIndex}>
+                              <span className="radio-button">
+                                <input
+                                  type="text"
+                                  value={opt.text}
+                                  onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value, "text")}
+                                />
+                              </span> 
+                              {/* Disable removing options */}
+                            </label>
+                          </div>
+                        ))}
+                        {/* Disable adding options */}
+                      </div>
+                    )}
+
+                    {/* Image URL options for Poll type */}
+                    {optionType === "imageUrl" && (
+                      <div className='options'>
+                        {quizData.questions[quizIndex].options.map((opt, optionIndex) => (
+                          <div className='option' key={optionIndex}>
+                            <label key={optionIndex}>
+                              <span className="radio-button">
+                                <input
+                                  type="url"
+                                  value={opt.imageUrl}
+                                  onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value, "imageUrl")}
+                                  placeholder="Enter image URL"
+                                />
+                              </span>
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Both (Text & Image URL) options for Poll type */}
+                    {optionType === "both" && (
+                      <div className='options'>
+                        {quizData.questions[quizIndex].options.map((opt, optionIndex) => (
+                          <div className='option' key={optionIndex}>
+                            <label key={optionIndex}>
+                              <span className="radio-button">
+                                <input
+                                  type="text"
+                                  value={opt.text}
+                                  onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value, "text")}
+                                />
+                              </span> 
+                              <span className="radio-button">
+                                <input 
+                                  type="url" 
+                                  value={opt.imageUrl}
+                                  onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value, "imageUrl")}
+                                  placeholder="Enter image URL"
+                                />
+                              </span> 
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div> {/* End of .optionGroup */}
                 </div>
               )}
 
