@@ -39,6 +39,7 @@
         flex: 1;
         display: flex;
         flex-direction: column;
+        overflow: hidden;
     }
     .takeQuizHeader {
         margin: 0em 1em;
