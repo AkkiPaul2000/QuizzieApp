@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './Quiz.css';
 import { BACKEND_URL } from '../../utils/constant';
+import prize from '../../assets/prize.svg'; 
+
 
 function TakeQuiz() {
   const { id } = useParams();
@@ -183,17 +185,23 @@ function TakeQuiz() {
         </div>
       )}
 
+      
       {isQuizFinished && quizData.type === 'qna' && (
         <div className="quiz-result">
-          <h3>Quiz Finished!</h3>
-          <p>Your score: {score} / {quizData.questions.length}</p>
+          <div className='quizText'>
+            <div className="quizHead">Congrats Quiz is completed</div>
+            <img src={prize} alt="prize"/>
+            <div>Your Score is </div>
+            <div className='quizScore'>0{score}/0{quizData.questions.length}</div>
+          </div>
         </div>
       )}
 
       {isQuizFinished && quizData.type === 'poll' && (
         <div className="quiz-result">
-          <h3>Poll Completed!</h3>
-          <p>Thank you for participating.</p>
+          <div className='pollText'>Thank you 
+          for participating in the Poll</div>
+          
         </div>
       )}
     </div>

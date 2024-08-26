@@ -168,4 +168,28 @@
         cursor: not-allowed;
         /* Change cursor to indicate it's disabled */
     }
+    .quiz-result {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .quiz-result .pollText {
+        font-family: Poppins;
+        font-size: 34px;
+        font-weight: 700;
+        line-height: 51px;
+        text-align: center;
+    }
+    .quiz-result .quizText {
+        font-family: Poppins;
+        font-size: 40px;
+        font-weight: 700;
+        line-height: 60px;
+        text-align: center;
+        color: var(--fontColor1);
+    }
+    .quiz-result .quizScore {
+        color: #60B84B;
+    }
 }
