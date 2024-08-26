@@ -160,8 +160,9 @@ function TakeQuiz() {
               className={`bothQuiz-option ${selectedAnswer === index ? 'selected' : ''}`}
               onClick={() => handleAnswerSelect(index)}
             >
-              {option.text && <span>{option.text}</span>}
+              <div className='bothDisp'>{option.text && <span>{option.text}</span>}
               {option.imageUrl && <img src={option.imageUrl} alt={`Option ${index + 1}`} />}
+              </div>
             </div>
           ))}
           

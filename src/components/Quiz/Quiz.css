@@ -41,8 +41,8 @@
         flex-direction: column;
     }
     .takeQuizHeader {
-        margin: 1em 3em;
-        flex: 1;
+        margin: 0em 1em;
+        flex: 0.7;
         flex-direction: row;
         display: flex;
         align-items: center;
@@ -92,6 +92,61 @@
         align-items: center;
         border-radius: 10px;
     }
+    .imgQuiz-option {
+        flex: 1;
+        background-color: #F0F0F0;
+        height: 7em;
+        margin: 1em;
+        font-family: Poppins;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 30px;
+        text-align: left;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+    }
+    .bothQuiz-option {
+        flex: 1;
+        background-color: #F0F0F0;
+        height: 7em;
+        margin: 1em;
+        font-family: Poppins;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 30px;
+        text-align: left;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+    }
+    .bothDisp {
+        width: 100%;
+        height: 100%;
+    }
+    .bothQuiz-option .bothDisp span {
+        position: absolute;
+        font-family: Poppins;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 27px;
+        text-align: left;
+        color: white;
+        left: 30px;
+    }
+    .bothQuiz-option .bothDisp img {
+        width: 100%;
+        height: 100%;
+        object-fit: block;
+        border-radius: 10px;
+    }
+    .imgQuiz-option img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
     .selected {
         border: 3px solid #5076FF
     }
@@ -104,5 +159,13 @@
         height: 4em;
         border-radius: 10px;
         background-color: #60B84B;
+    }
+    .button button:disabled {
+        background-color: lightgray;
+        /* Or any color you prefer */
+        color: gray;
+        /* Adjust text color for contrast */
+        cursor: not-allowed;
+        /* Change cursor to indicate it's disabled */
     }
 }
