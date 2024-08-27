@@ -104,7 +104,7 @@ const Dashboard = () => {
         });
 
         return (
-          <Link to={`/quiz/${quiz._id}`} key={quiz._id}>
+          <Link to={`/quiz/analysis/${quiz._id}`} key={quiz._id}>
             <div className='trendQuiz'>
               <div className='trendHead'>
                 <div>{quiz.title}</div>
