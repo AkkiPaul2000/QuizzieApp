@@ -17,8 +17,8 @@ import QuestionAnalysis from './components/Dashboard/QuestionAnalysis';
 
 
 const ProtectedRoute = ({ children }) => {
-  const { isLoggedIn } = useAuth();
-  
+  const { isLoggedIn,user } = useAuth();
+    console.log("login",isLoggedIn,"user",user)
 
   if (!isLoggedIn) {
     return <Navigate to="/login" replace />;
