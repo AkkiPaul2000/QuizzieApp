@@ -37,7 +37,6 @@ const QuestionAnalysis = () => {
           month: 'short', // Use 'short' for abbreviated month name
           year: 'numeric'
         });
-
   return (
     <div className="question-analysis">
       <div className="headerDiv">
@@ -48,16 +47,16 @@ const QuestionAnalysis = () => {
         {quiz.questions.map(question=>
         <div class="question-card">
         <h2>{question.questionText}</h2>
-        <div style={{display:'flex',flexDirection:'row'}}>
-        <div style={{display:'flex',flex:1,flexDirection:'column',justifyContent:'center',alignItems:'center',backgroundColor:'white',border:'10px'}}>
+        <div className='datas'>
+        <div className='data'>
                 <p className='impData'>{question.impressions}</p>
                 <p>people Attempted the question</p>
         </div>
-        <div style={{display:'flex',flex:1,flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+        <div className='data'>
                 <p className='impData'>{question.correctAttempts}</p>
                 <p>people Answered Correctly</p>
         </div>
-        <div style={{display:'flex',flex:1,flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+        <div className='data'>
                 <p className='impData'>{question.wrongAttempts}</p>
                 <p>people Answered Incorrectly</p>
         </div>
@@ -68,10 +67,10 @@ const QuestionAnalysis = () => {
         {quiz.questions.map(question=>
         <div class="question-card">
         <h2>{question.questionText}</h2>
-        <div style={{display:'flex',flexDirection:'row'}}>
+        <div className='datas'>
           {question.options.map(option=>
-        <div style={{display:'flex',flex:1,flexDirection:'row',justifyContent:'center',alignItems:'center',backgroundColor:'white',border:'10px'}}>
-                <p className='clickData'>{option.clicked}</p>
+        <div className='data'>
+                <p className='impData'>{option.clicked}</p>
                 <p>{option.text}</p>
         </div>)}
         </div>

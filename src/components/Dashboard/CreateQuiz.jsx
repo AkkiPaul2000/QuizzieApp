@@ -342,6 +342,7 @@ const CreateQuiz = ({ onClose }) => {
 
             { /*  number section */}
             <div className='indexGrp' style={{display:'flex',justifyContent:'flex-start',alignItems:'center',margin:'10px 30px',padding:'0px 10px'}}>
+              <div style={{display:'flex',flex:1,flexDirection:'row',alignItems:'center'}}>
              {quizData.questions.map((question, index) =><div className='quizIndex'  key={index} >
               <span style={{cursor:'pointer'}} 
               onClick={()=>{
@@ -352,6 +353,9 @@ const CreateQuiz = ({ onClose }) => {
              {index>0 && <img src={cross} className="close"  alt="remove" onClick={()=>handleRemoveQuestion(index)}  />}
              </div> )}
              <div style={{cursor:'pointer',}} className='plus' onClick={handleAddQuestion}><img src={plus} alt="Add" /></div>
+             </div>
+             <div style={{textAlign:'right'}}>Max of 5questions</div>
+
              </div >
               {/* QNA/Poll Question */}
               <div style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
