@@ -89,7 +89,15 @@ function QuizAnalytics() {
     setDelModel(false)
   };
 
-
+  const convertDate=(number)=>{
+    const createdAtDate = new Date(quiz.createdAt);
+  const formattedDate = createdAtDate.toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short', // Use 'short' for abbreviated month name
+    year: 'numeric'
+  });
+  return formattedDate;
+  }
 
   return (
     <div className="quizAnalytics">
@@ -111,7 +119,7 @@ function QuizAnalytics() {
               <tr key={quiz._id}>
                 <td>{index + 1}</td>
                 <td>{quiz.title}</td>
-                <td>01 Sep, 2023</td> {/* Replace with dynamic date if available */}
+                <td>{convertDate(quiz.createdAt)}</td> {/* Replace with dynamic date if available */}
                 <td>{quiz.impressions}</td>
                 <td style={{whiteSpace:'nowrap'}}>
                 <button 
