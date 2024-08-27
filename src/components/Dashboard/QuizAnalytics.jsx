@@ -90,7 +90,7 @@ function QuizAnalytics() {
   };
 
   const convertDate=(number)=>{
-    const createdAtDate = new Date(quiz.createdAt);
+    const createdAtDate = new Date(number);
   const formattedDate = createdAtDate.toLocaleDateString('en-GB', {
     day: 'numeric',
     month: 'short', // Use 'short' for abbreviated month name
