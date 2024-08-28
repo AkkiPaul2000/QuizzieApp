@@ -433,7 +433,7 @@ const CreateQuiz = ({ onClose }) => {
                   ))}
                   {currentOptionsLength < 4 && ( // Use currentOptionsLength in the condition
                   <div className='addOption'>
-                      <button onClick={handleAddOption} className='addOption' id="addOption">
+                      <button onClick={handleAddOption} className='addOption' id="addOption" type='button'>
                         Add Option
                       </button>
                       </div>
