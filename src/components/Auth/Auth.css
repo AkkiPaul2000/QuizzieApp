@@ -125,7 +125,7 @@
 }
 
 .inputError {
-    border-color: red;
+    background-color: #7b7bdf;
 }
 
 .errorText {

@@ -5,6 +5,8 @@ import { toast } from 'react-toastify';
 import { BACKEND_URL } from '../../utils/constant';
 import 'react-toastify/dist/ReactToastify.css';
 import './Auth.css';
+import validator from 'validator'; // Import the validator library
+
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -32,29 +34,27 @@ const Register = () => {
     // Basic validation
     let isValid = true;
 
-    // Name validation: at least 3 characters, only letters and spaces
-    const nameRegex = /^[A-Za-z\s]{3,}$/;
-    if (!nameRegex.test(name)) {
+    // Name validation: at least 3 characters
+    if (name.trim().length < 3) {
       setNameError('Invalid name.');
       isValid = false;
     }
 
-    // Email validation: simple email regex
-    if (!email) {
+    // Email validation using validator.js
+    if (!validator.isEmail(email)) {
       setEmailError('Invalid email.');
       isValid = false;
     }
 
-    // Password validation: at least 8 characters, one uppercase, one lowercase, one number, one special character
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
-    if (!passwordRegex.test(password)) {
-      setPasswordError('weak password.');
+    // Password validation: at least 8 characters
+    if (password.length < 8) {
+      setPasswordError('Weak Password.');
       isValid = false;
     }
 
     // Confirm password validation
     if (password !== confirmPassword) {
-      setConfirmPasswordError(`Passwords doesn't match`);
+      setConfirmPasswordError("Passwords doesn't match");
       isValid = false;
     }
 
@@ -96,8 +96,8 @@ const Register = () => {
                 id="name"
                 value={name}
                 onChange={handleInputChange(setName, setNameError)}
-                className={nameError ? 'inputError' : ''}
-              />
+                style={{ border: nameError ? '1px solid red' : '' }} // Conditionally apply red border
+                />
               {nameError && <span className='errorText'>{nameError}</span>}
             </div>
             <div className='inputWrapper'>
@@ -107,7 +107,7 @@ const Register = () => {
                 id="email"
                 value={email}
                 onChange={handleInputChange(setEmail, setEmailError)}
-                className={emailError ? 'inputError' : ''}
+                style={{ border: nameError ? '1px solid red' : '' }} // Conditionally apply red border
               />
               {emailError && <span className='errorText'>{emailError}</span>}
             </div>
@@ -118,7 +118,7 @@ const Register = () => {
                 id="password"
                 value={password}
                 onChange={handleInputChange(setPassword, setPasswordError)}
-                className={passwordError ? 'inputError' : ''}
+                style={{ border: nameError ? '1px solid red' : '' }} // Conditionally apply red border
               />
               {passwordError && <span className='Pass1errorText'>{passwordError}</span>}
             </div>
@@ -129,7 +129,7 @@ const Register = () => {
                 id="confirmPassword"
                 value={confirmPassword}
                 onChange={handleInputChange(setConfirmPassword, setConfirmPasswordError)}
-                className={confirmPasswordError ? 'inputError' : ''}
+                style={{ border: nameError ? '1px solid red' : '' }} // Conditionally apply red border
               />
               {confirmPasswordError && <span className='Pass2errorText'>{confirmPasswordError}</span>}
             </div>
