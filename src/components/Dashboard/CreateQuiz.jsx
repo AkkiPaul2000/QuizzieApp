@@ -135,9 +135,10 @@ const CreateQuiz = ({ onClose }) => {
   };
 
   const handleAddQuestion = () => {
-    setQuizIndex(quizData.questions.length)
+    
 
     if (quizData.questions.length < 5) { 
+      setQuizIndex(quizData.questions.length)
       setQuizData({
         ...quizData,
         questions: [
