@@ -217,7 +217,6 @@
     }
     .currentQues span {
         width: 20rem;
-        background-color: red;
         word-wrap: break-word;
     }
 }
