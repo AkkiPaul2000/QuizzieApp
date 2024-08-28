@@ -42,8 +42,9 @@ export const AuthProvider = ({ children }) => {
             toast.error('Your session has expired. Please log in again.'); 
           } else {
             // Handle other errors
+            logout()
             console.error('Error verifying token:', error);
-            toast.error('An error occurred. Please try again later.');
+            toast.error('An error occurred. Please login again');
           }
         }
       } else {
