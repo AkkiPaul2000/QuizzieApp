@@ -227,16 +227,6 @@ const CreateQuiz = ({ onClose }) => {
     // Check if either text or imageUrl is empty after trimming
     if (option.text.trim() === '' || option.imageUrl.trim() === '') {
       condion1 = true; 
-    } 
-
-    // Check if imageUrl is present and valid
-    if (option.imageUrl.trim() !== '') { 
-      const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
-      if (!urlPattern.test(option.imageUrl)) {
-        console.log("Invalid URL:", option.imageUrl);
-        condion1 = true; 
-        toast.error('Fill up the URL correctly'); 
-      }
     }
   });
 }
@@ -427,12 +417,13 @@ const CreateQuiz = ({ onClose }) => {
                         value={optionIndex}
                         checked={quizData.questions[quizIndex].correctAnswer === optionIndex} 
                         onChange={() => handleCorrectAnswerChange(quizIndex, optionIndex)} 
-                      />
+                        />
                       <span className="radio-button">
                         <input // Add an input field for editing
                           type="text"
                           value={opt.text}
                           placeholder="Text"
+                        onClick={() => handleCorrectAnswerChange(quizIndex, optionIndex)} // Manually trigger the radio button selection
                           onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value,"text")}
                         />
                       </span> 
@@ -466,6 +457,8 @@ const CreateQuiz = ({ onClose }) => {
                                 value={opt.imageUrl}
                                 onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value,"imageUrl")}
                                 placeholder="Enter image URL"
+                                onClick={() => handleCorrectAnswerChange(quizIndex, optionIndex)} // Manually trigger the radio button selection
+
                               />
                             </span>
                             {optionIndex > 1 && (
@@ -506,6 +499,7 @@ const CreateQuiz = ({ onClose }) => {
                                 type="text"
                                 value={opt.text}
                                 checked={quizData.questions[quizIndex].correctAnswer === optionIndex}
+                                onClick={() => handleCorrectAnswerChange(quizIndex, optionIndex)} // Manually trigger the radio button selection
                                 placeholder="Text"
                                 onChange={(e) => handleOptionTextChange(quizIndex, optionIndex, e.target.value,"text")}
                               />
