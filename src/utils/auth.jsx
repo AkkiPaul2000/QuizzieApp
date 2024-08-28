@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
+
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     const token = localStorage.getItem('token');
     return token ? true : false; 
@@ -20,6 +22,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkTokenValidity = async () => {
       const token = localStorage.getItem('token');
+      console.log('token')
       if (token) {
         try {
           // Verify token on the backend 
@@ -54,6 +57,8 @@ export const AuthProvider = ({ children }) => {
     if (!location.pathname.startsWith('/quiz/') && location.pathname !== '/login' && location.pathname !== '/register') { 
       checkTokenValidity(); 
     }
+    setIsLoading(false); // Set loading to false after verification (or error)
+
   }, [location]); 
 
   const login = (token) => {

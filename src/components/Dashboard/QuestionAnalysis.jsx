@@ -20,14 +20,21 @@ const QuestionAnalysis = () => {
         console.log(response.data);
       } catch (error) {
         console.log(error);
-        toast.error(error.response?.data?.error || 'Failed to fetch quizzes');
+        
+        // Handle 401 Unauthorized (invalid token) specifically
+        if (error.response && error.response.status === 401) {
+          toast.error('You need to be logged in to view quiz analytics.');
+        } else {
+          toast.error(error.response?.data?.error || 'Failed to fetch quizzes');
+        }
       }
     };
 
     if (user) {
       fetchQuizzes();
     }
-  }, [user]);
+  }, [user, id]); // Include 'id' in the dependency array
+
   if (!quiz) {
     return <div>No quiz data available</div>;
   }

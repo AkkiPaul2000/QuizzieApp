@@ -66,7 +66,7 @@ const MainApp = () => {
             />
             <Route path="/quiz/:id" element={<TakeQuiz />} />
             <Route
-              path="/quiz/analysis/:id"
+              path="/analytics/:id"
               element={
                 <ProtectedRoute>
                   <QuestionAnalysis />

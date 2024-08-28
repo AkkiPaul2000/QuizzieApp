@@ -13,7 +13,7 @@ import EditQuiz from './EditQuiz';
 
 
 function QuizAnalytics() {
-  const { user } = useAuth();
+  const { user,loading } = useAuth();
   const [quizzes, setQuizzes] = useState([]);
   const [selectedQuiz, setSelectedQuiz] = useState(null); // To store the quiz being edited
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -98,7 +98,9 @@ function QuizAnalytics() {
   });
   return formattedDate;
   }
-
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="quizAnalytics">
       <h1>Quiz Analytics</h1>
@@ -138,9 +140,9 @@ function QuizAnalytics() {
                   </td>
                   <td>
                   <Link
-                    to={`/quiz/analysis/${quiz._id}`}
+                    to={`/analytics/${quiz._id}`}
                     className="analysis-link"
-                    state={{ quiz }} // Passing quiz data through Link
+                    
                   >
                     Question Wise Analysis
                   </Link>
