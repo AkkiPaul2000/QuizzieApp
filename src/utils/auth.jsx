@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     // Check token validity only if not on the /quiz/:id route
-    if (!location.pathname.startsWith('/quiz/')) {
+    if (!location.pathname.startsWith('/quiz/') && location.pathname !== '/login' && location.pathname !== '/register') { 
       checkTokenValidity(); 
     }
   }, [location]); 
