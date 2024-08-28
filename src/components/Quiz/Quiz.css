@@ -205,6 +205,19 @@
         display: grid;
         grid-template-columns: 1fr;
         /* Three columns: 1fr for left side, auto for content, 1fr for right side */
-        gap: 5rem 5rem;
+        gap: 1.5rem;
+    }
+    .currentQues {
+        flex: 0.5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5em;
+        font-family: Poppins;
+    }
+    .currentQues span {
+        width: 20rem;
+        background-color: red;
+        word-wrap: break-word;
     }
 }
