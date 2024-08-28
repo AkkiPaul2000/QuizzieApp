@@ -1,5 +1,5 @@
 // src/components/common/Sidebar.jsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import './Common.css'
 import { useAuth } from '../../utils/auth';
@@ -7,6 +7,8 @@ import { toast } from 'react-toastify';
 import CreateQuiz from '../Dashboard/CreateQuiz';
 const Sidebar = () => {
   const { isLoggedIn, logout,user } = useAuth();
+  const [selIndex,setSelIndex]=useState(0)
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const navigate=useNavigate();
@@ -17,13 +19,26 @@ const Sidebar = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    window.location.reload();
   };
   const handleLogout = async (e) => {
     logout()
     toast.dark('Logout successful!');
     Navigate('/login')
   }
-  const [selIndex,setSelIndex]=useState(0)
+  useEffect(() => {
+    const currentUrl = window.location.href;
+
+    if (currentUrl.includes('dashboard')) {
+      setSelIndex(0);
+    } else if (currentUrl.includes('analytics')) { 
+      setSelIndex(1);
+    } 
+    else if (currentUrl.includes('analysis')) { 
+      setSelIndex(1);
+    } 
+    // You can add more conditions here for other routes if needed
+  }, []); // Empty dependency array ensures this runs only once on mount
   return (
     <>
     <aside style={{ width: '200px', backgroundColor: '#FFFFFF', color: '#474444', padding: '0px 20px' }}>

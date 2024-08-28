@@ -13,7 +13,7 @@ const QuestionAnalysis = () => {
   useEffect(() => {
     const fetchQuizzes = async () => {
       try {
-        const response = await axios.get(`${BACKEND_URL}/api/quiz/${id}`, {
+        const response = await axios.get(`${BACKEND_URL}/api/quiz/analytics/${id}`, {
           headers: { Authorization: localStorage.getItem('token') },
         });
         setQuizzes(response.data);

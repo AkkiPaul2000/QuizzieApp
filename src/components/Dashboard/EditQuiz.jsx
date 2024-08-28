@@ -193,15 +193,7 @@ const EditQuiz = ({ quiz, onClose, onSave }) => {
               // Check if imageUrl is empty after trimming
               if (option.imageUrl.trim() === '') {
                   condion1 = true; 
-              } else {
-                  // Check if imageUrl is a valid URL (using a simple regex)
-                  const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
-                  if (!urlPattern.test(option.imageUrl)) {
-                      console.log("Invalid URL:", option.imageUrl); // Or set another flag for invalid URLs
-                      condion1 = true; 
-                      toast.error('fillup the url correctly');
-                  }
-              }
+              } 
           });
       }
       if (question.type === "both") {
@@ -253,15 +245,14 @@ const EditQuiz = ({ quiz, onClose, onSave }) => {
   return (
     <div className="modal">
       <div className="content" style={{flexDirection:'column'}}>
-        <span className="close" onClick={onClose}>&times;</span>
-        <h2>Edit Quiz</h2> {/* Change the heading */}
+        <div style={{display:'flex',alignItems:'center',justifyContent:'flex-start'}}><h2>Edit Quiz</h2> {/* Change the heading */}
         <div className='quizList'>
             {/* number section */}
             <div className='indexGrp' style={{display:'flex',flexDirection:'row'}}>
               {quizData.questions.map((question, index) => (
                 <div className='quizIndex' key={index}>
                   <span
-                    style={{ cursor: 'pointer' }}
+                    style={{ cursor: 'pointer',padding:10 }}
                     onClick={() => handleQuestionNavigate(index)}
                     className={quizIndex === index ? 'activeQuestion' : ''} // Add active class
                   >
@@ -269,6 +260,7 @@ const EditQuiz = ({ quiz, onClose, onSave }) => {
                   </span>
                 </div>
               ))}
+            </div>
             </div>
             </div>
         <form onSubmit={handleSubmit}>

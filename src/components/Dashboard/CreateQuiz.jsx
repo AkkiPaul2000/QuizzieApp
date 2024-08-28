@@ -135,6 +135,8 @@ const CreateQuiz = ({ onClose }) => {
   };
 
   const handleAddQuestion = () => {
+    setQuizIndex(quizData.questions.length)
+
     if (quizData.questions.length < 5) { 
       setQuizData({
         ...quizData,
@@ -215,15 +217,7 @@ const CreateQuiz = ({ onClose }) => {
               // Check if imageUrl is empty after trimming
               if (option.imageUrl.trim() === '') {
                   condion1 = true; 
-              } else {
-                  // Check if imageUrl is a valid URL (using a simple regex)
-                  const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
-                  if (!urlPattern.test(option.imageUrl)) {
-                      console.log("Invalid URL:", option.imageUrl); // Or set another flag for invalid URLs
-                      condion1 = true; 
-                      toast.error('fillup the url correctly');
-                  }
-              }
+              } 
           });
       }
         if (question.type === "both") {
@@ -344,7 +338,7 @@ const CreateQuiz = ({ onClose }) => {
             <div className='indexGrp' style={{display:'flex',justifyContent:'flex-start',alignItems:'center',margin:'10px 30px',padding:'0px 10px'}}>
               <div style={{display:'flex',flex:1,flexDirection:'row',alignItems:'center'}}>
              {quizData.questions.map((question, index) =><div className='quizIndex'  key={index} >
-              <span style={{cursor:'pointer'}} 
+              <span style={{cursor:'pointer',padding:10}} 
               onClick={()=>{
                 setQuizIndex(index)
                 setOptionType(quizData.questions[index].type)

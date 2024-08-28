@@ -16,13 +16,15 @@ import './index.css';
 import QuestionAnalysis from './components/Dashboard/QuestionAnalysis';
 
 
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = ({ children,path }) => {
   const { isLoggedIn,user } = useAuth();
     console.log("login",isLoggedIn,"user",user)
 
-  if (!isLoggedIn) {
-    return <Navigate to="/login" replace />;
-  }
+    // const requiresAuth = !path.startsWith('/quiz/'); 
+
+    if (!isLoggedIn) {
+      return <Navigate to="/login" replace />;
+    }
   return (
     <div className='protected-route-container'>
       <Sidebar className="sidebar" /> {/* Sidebar will only render for protected routes */}
@@ -35,8 +37,10 @@ const ProtectedRoute = ({ children }) => {
 
 const MainApp = () => {
   return (
+    <Router>
     <AuthProvider>
-      <Router>
+          
+
         <div style={{ backgroundColor: '#F2F2F2', display: 'flex', flexDirection: 'column', height: '100vh' }}>
           
           <ToastContainer />
@@ -71,8 +75,11 @@ const MainApp = () => {
             />
           </Routes>
         </div>
-      </Router>
+      
+    
     </AuthProvider>
+    </Router>
+
   );
 };
 
