@@ -228,8 +228,7 @@ const CreateQuiz = ({ onClose }) => {
     if (option.text.trim() === '' || option.imageUrl.trim() === '') {
       condion1 = true; 
     }
-  });
-}
+  } ) ; }
   });
    
     

@@ -104,7 +104,6 @@ const Dashboard = () => {
         });
 
         return (
-          <Link to={`/quiz/analysis/${quiz._id}`} key={quiz._id}>
             <div className='trendQuiz'>
               <div className='trendHead'>
                 <div>{quiz.title}</div>
@@ -112,7 +111,6 @@ const Dashboard = () => {
               </div>
               <div className='createdOn'>Created on : {formattedDate}</div> {/* Display formatted date */}
             </div>
-          </Link> 
         );
       })}
       </div>
